@@ -1,0 +1,13 @@
+<div align="center">
+    {% if all_albums %}
+        {% for album in all_albums %}
+            <p><h2><a href="/music/{{ album.id }}/">{{ album.artist }} - {{ album.album_title }}</a></h2>
+            <img src="{{ album.album_logo }}" alt="{{ album.artist }} - {{ album.album_title }}">
+            <br><br>
+            <div>{{ album.genre }}</div>
+            <hr></p>
+        {% endfor %}
+    {% else %}
+        <h3>No albums to show you</h3>
+    {% endif %}
+</div>
