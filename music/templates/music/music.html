@@ -1,8 +1,8 @@
 <div align="center">
     {% if all_albums %}
         {% for album in all_albums %}
-            <p><h2><a href="/music/{{ album.id }}/">{{ album.artist }} - {{ album.album_title }}</a></h2>
-            <img src="{{ album.album_logo }}" alt="{{ album.artist }} - {{ album.album_title }}">
+            <p><h2><a href="/music/{{ album.id }}/">{{ album }}</a></h2>
+            <img src="{{ album.album_logo }}" alt="{{ album }}">
             <br><br>
             <div>{{ album.genre }}</div>
             <hr></p>

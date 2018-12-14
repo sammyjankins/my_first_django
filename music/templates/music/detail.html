@@ -1,1 +1,11 @@
-<h2>Details for album {{ album_id }}</h2>
+<h3>{{ album }}</h3>
+<img src="{{ album.album_logo }}" alt="{{ album }}" width="300">
+<br>
+<span>Genre: {{ album.genre }}</span><br>
+<span>Format: {{ album.file_type }}</span>
+<ol>
+    {% for song in album.song_set.all %}
+        <li>{{ song.song_title }}</li>
+    {% endfor %}
+</ol>
+
