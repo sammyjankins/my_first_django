@@ -1,3 +1,30 @@
+<!-- Loads the path to your static files -->
+{%  load staticfiles %}
+<link rel="stylesheet"
+      href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
+      integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
+      crossorigin="anonymous">
+<link rel="stylesheet" type="text/css" href="{% static 'music/style.css' %}">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+
+        <!-- Logo -->
+        <div class="navbar-header">
+            <a class="navbar-brand" href="{%  url 'music:index' %}">SJ</a>
+            <button class="navbar-toggler" type="button"
+                    data-toggle="collapse"
+                    data-target="#navbarTogglerDemo02"
+                    aria-controls="navbarTogglerDemo02"
+                    aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+        </div>
+
+    </div>
+</nav>
+
 <div align="center">
     {% if all_albums %}
         {% for album in all_albums %}

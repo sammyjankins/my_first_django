@@ -1,14 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ef1addc4-4091-49b4-a51d-cfef554d1719" name="Default Changelist" comment="Details page">
+    <list default="true" id="ef1addc4-4091-49b4-a51d-cfef554d1719" name="Default Changelist" comment="">
+      <change afterPath="$PROJECT_DIR$/music/static/music/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/db.sqlite3" beforeDir="false" afterPath="$PROJECT_DIR$/db.sqlite3" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/music/admin.py" beforeDir="false" afterPath="$PROJECT_DIR$/music/admin.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/music/models.py" beforeDir="false" afterPath="$PROJECT_DIR$/music/models.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/music/templates/music/detail.html" beforeDir="false" afterPath="$PROJECT_DIR$/music/templates/music/detail.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/music/templates/music/music.html" beforeDir="false" afterPath="$PROJECT_DIR$/music/templates/music/music.html" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/music/views.py" beforeDir="false" afterPath="$PROJECT_DIR$/music/views.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -24,23 +20,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/my_first_django/settings.py">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/music/templates/music/music.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="75">
-              <caret line="33" column="29" selection-start-line="33" selection-start-column="29" selection-end-line="33" selection-end-column="29" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/music/models.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="24" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
-              <folding>
-                <element signature="e#24#63#0" expanded="true" />
-              </folding>
+            <state relative-caret-position="435">
+              <caret line="29" column="37" selection-start-line="29" selection-start-column="37" selection-end-line="29" selection-end-column="37" />
             </state>
           </provider>
         </entry>
@@ -48,8 +32,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/music/views.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="255">
-              <caret line="17" column="63" lean-forward="true" selection-start-line="17" selection-start-column="63" selection-end-line="17" selection-end-column="63" />
+            <state relative-caret-position="420">
+              <caret line="28" column="69" selection-start-line="28" selection-start-column="69" selection-end-line="28" selection-end-column="69" />
               <folding>
                 <element signature="e#24#63#0" expanded="true" />
               </folding>
@@ -58,19 +42,10 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/music/templates/music/music.html">
+        <entry file="file://$PROJECT_DIR$/music/models.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="105">
-              <caret line="7" column="20" lean-forward="true" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/music/admin.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="90">
-              <caret line="6" column="24" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
+            <state relative-caret-position="300">
+              <caret line="20" column="51" selection-start-line="20" selection-start-column="51" selection-end-line="20" selection-end-column="51" />
               <folding>
                 <element signature="e#24#63#0" expanded="true" />
               </folding>
@@ -78,11 +53,20 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/music/templates/music/detail.html">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="45">
-              <caret line="3" column="41" selection-start-line="3" selection-start-column="41" selection-end-line="3" selection-end-column="41" />
+            <state relative-caret-position="285">
+              <caret line="19" column="89" selection-start-line="19" selection-start-column="89" selection-end-line="19" selection-end-column="89" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/music/static/music/style.css">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="15">
+              <caret line="1" column="44" lean-forward="true" selection-start-line="1" selection-start-column="44" selection-end-line="1" selection-end-column="44" />
             </state>
           </provider>
         </entry>
@@ -90,8 +74,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/music/urls.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="150">
-              <caret line="10" column="1" lean-forward="true" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
+            <state relative-caret-position="210">
+              <caret line="14" column="75" selection-start-line="14" selection-start-column="75" selection-end-line="14" selection-end-column="75" />
               <folding>
                 <element signature="e#0#32#0" expanded="true" />
               </folding>
@@ -106,6 +90,7 @@
       <list>
         <option value="Python Script" />
         <option value="HTML File" />
+        <option value="CSS File" />
       </list>
     </option>
   </component>
@@ -118,13 +103,14 @@
         <option value="$PROJECT_DIR$/untitled/urls.py" />
         <option value="$PROJECT_DIR$/manage.py" />
         <option value="$PROJECT_DIR$/my_first_django/settings.py" />
-        <option value="$PROJECT_DIR$/music/urls.py" />
         <option value="$PROJECT_DIR$/music/templates/music/index.html" />
-        <option value="$PROJECT_DIR$/music/views.py" />
         <option value="$PROJECT_DIR$/music/admin.py" />
-        <option value="$PROJECT_DIR$/music/templates/music/music.html" />
         <option value="$PROJECT_DIR$/music/models.py" />
+        <option value="$PROJECT_DIR$/music/urls.py" />
+        <option value="$PROJECT_DIR$/music/views.py" />
         <option value="$PROJECT_DIR$/music/templates/music/detail.html" />
+        <option value="$PROJECT_DIR$/music/static/music/style.css" />
+        <option value="$PROJECT_DIR$/music/templates/music/music.html" />
       </list>
     </option>
   </component>
@@ -159,12 +145,6 @@
               <item name="my_first_django" type="b2602c69:ProjectViewProjectNode" />
               <item name="my_first_django" type="462c0819:PsiDirectoryNode" />
               <item name="music" type="462c0819:PsiDirectoryNode" />
-              <item name="migrations" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="my_first_django" type="b2602c69:ProjectViewProjectNode" />
-              <item name="my_first_django" type="462c0819:PsiDirectoryNode" />
-              <item name="music" type="462c0819:PsiDirectoryNode" />
               <item name="templates" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
@@ -189,6 +169,7 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
@@ -275,7 +256,7 @@
       <workItem from="1544516496271" duration="104000" />
       <workItem from="1544521602549" duration="2224000" />
       <workItem from="1544767650931" duration="7090000" />
-      <workItem from="1544781002142" duration="9052000" />
+      <workItem from="1544781002142" duration="17984000" />
     </task>
     <task id="LOCAL-00001" summary="First commit">
       <created>1544771616326</created>
@@ -312,11 +293,25 @@
       <option name="project" value="LOCAL" />
       <updated>1544786421333</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="Replaced file_type to album&#10;Added tracklist to details">
+      <created>1544790489280</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1544790489280</updated>
+    </task>
+    <task id="LOCAL-00007" summary="Added &quot;favorite songs&quot;">
+      <created>1544795384621</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1544795384621</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="18470000" />
+    <option name="totallyTimeSpent" value="27402000" />
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -329,6 +324,7 @@
   </component>
   <component name="ToolWindowManager">
     <frame x="67" y="25" width="1853" height="925" extended-state="6" />
+    <editor active="true" />
     <layout>
       <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.14997233" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -362,7 +358,9 @@
     <MESSAGE value="music/admin" />
     <MESSAGE value="View for albums list (html still blended with python code)" />
     <MESSAGE value="Using templates in views" />
-    <option name="LAST_COMMIT_MESSAGE" value="Using templates in views" />
+    <MESSAGE value="Replaced file_type to album&#10;Added tracklist to details" />
+    <MESSAGE value="Added &quot;favorite songs&quot;" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added &quot;favorite songs&quot;" />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/my_first_django/wsgi.py">
@@ -398,26 +396,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/music/urls.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="150">
-          <caret line="10" column="1" lean-forward="true" selection-start-line="10" selection-start-column="1" selection-end-line="10" selection-end-column="1" />
-          <folding>
-            <element signature="e#0#32#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/music/views.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="255">
-          <caret line="17" column="63" lean-forward="true" selection-start-line="17" selection-start-column="63" selection-end-line="17" selection-end-column="63" />
-          <folding>
-            <element signature="e#24#63#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/music/admin.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="90">
@@ -428,13 +406,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/music/templates/music/music.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="105">
-          <caret line="7" column="20" lean-forward="true" selection-start-line="7" selection-start-column="20" selection-end-line="7" selection-end-column="20" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/my_first_django/settings.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="75">
@@ -442,10 +413,30 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/music/urls.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="75" selection-start-line="14" selection-start-column="75" selection-end-line="14" selection-end-column="75" />
+          <folding>
+            <element signature="e#0#32#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/music/views.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="420">
+          <caret line="28" column="69" selection-start-line="28" selection-start-column="69" selection-end-line="28" selection-end-column="69" />
+          <folding>
+            <element signature="e#24#63#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/music/models.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="90">
-          <caret line="6" column="24" selection-start-line="6" selection-start-column="24" selection-end-line="6" selection-end-column="24" />
+        <state relative-caret-position="300">
+          <caret line="20" column="51" selection-start-line="20" selection-start-column="51" selection-end-line="20" selection-end-column="51" />
           <folding>
             <element signature="e#24#63#0" expanded="true" />
           </folding>
@@ -454,8 +445,22 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/music/templates/music/detail.html">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="45">
-          <caret line="3" column="41" selection-start-line="3" selection-start-column="41" selection-end-line="3" selection-end-column="41" />
+        <state relative-caret-position="285">
+          <caret line="19" column="89" selection-start-line="19" selection-start-column="89" selection-end-line="19" selection-end-column="89" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/music/static/music/style.css">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="15">
+          <caret line="1" column="44" lean-forward="true" selection-start-line="1" selection-start-column="44" selection-end-line="1" selection-end-column="44" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/music/templates/music/music.html">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="29" column="37" selection-start-line="29" selection-start-column="37" selection-end-line="29" selection-end-column="37" />
         </state>
       </provider>
     </entry>
