@@ -1,11 +1,11 @@
 <div align="center">
     {% if all_albums %}
         {% for album in all_albums %}
-            <p><h2><a href="/music/{{ album.id }}/">{{ album }}</a></h2>
+            <h2><a href="{% url 'music:detail' album.id %}">{{ album }}</a></h2>
             <img src="{{ album.album_logo }}" alt="{{ album }}">
             <br><br>
-            <div>{{ album.genre }}</div>
-            <hr></p>
+            <span>{{ album.genre }}</span>
+            <hr>
         {% endfor %}
     {% else %}
         <h3>No albums to show you</h3>
