@@ -1,3 +1,13 @@
 body{
     background: white url("images/background.jpg");
 }
+.navbar .container-fluid .navbar-brand{
+    font-family: 'Pacifico', cursive;
+}
+.navbar .container-fluid .navbar-brand:hover,
+.navbar .container-fluid .navbar-brand:focus{
+    color: #d64161;
+}
+.navbaricon{
+    color: white;
+}
