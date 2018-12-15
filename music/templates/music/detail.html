@@ -1,27 +1,30 @@
-<h3>{{ album }}</h3>
+{% extends 'music/base.html' %}
+{% block title %}Album Details{% endblock %}
+{% block body %}
+    <h3>{{ album }}</h3>
 
-<img src="{{ album.album_logo }}" alt="{{ album }}" width="300"><br>
+    <img src="{{ album.album_logo }}" alt="{{ album }}" width="300"><br>
 
-<span>Genre: {{ album.genre }}</span><br>
-<span>Format: {{ album.file_type }}</span>
+    <span>Genre: {{ album.genre }}</span><br>
+    <span>Format: {{ album.file_type }}</span>
 
-{% if error_message %}
-    <p><strong>{{ error_message }}</strong></p>
-{% endif %}
+    {% if error_message %}
+        <p><strong>{{ error_message }}</strong></p>
+    {% endif %}
 
-<form action="{% url 'music:favorite' album.id %}" method="post">
-    {% csrf_token %}
-    {% for song in album.song_set.all %}
-        <input type="radio" id="song{{ forloop.counter }}"
-               name="song" value="{{ song.id }}"/>
-        <label for="song{{ forloop.counter }}">
-            {{ song.song_title }}
-            {% if song.is_favorite %}
-                <img src="https://cdn.iconscout.com/icon/free/png-256/flame-58-546932.png"
-                     alt="{{ song.song_title }}" width="16">
-            {% endif %}
-        </label><br>
-    {% endfor %}
-    <input type="submit" value="Favorite">
-</form>
-
+    <form action="{% url 'music:favorite' album.id %}" method="post">
+        {% csrf_token %}
+        {% for song in album.song_set.all %}
+            <input type="radio" id="song{{ forloop.counter }}"
+                   name="song" value="{{ song.id }}"/>
+            <label for="song{{ forloop.counter }}">
+                {{ song.song_title }}
+                {% if song.is_favorite %}
+                    <img src="https://cdn.iconscout.com/icon/free/png-256/flame-58-546932.png"
+                         alt="{{ song.song_title }}" width="16">
+                {% endif %}
+            </label><br>
+        {% endfor %}
+        <input type="submit" value="Favorite">
+    </form>
+{% endblock %}
