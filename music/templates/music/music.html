@@ -1,16 +1,10 @@
 {% extends 'music/base.html' %}
 {% block body %}
-    <div align="center">
-        {% if all_albums %}
-            {% for album in all_albums %}
-                <h2><a href="{% url 'music:detail' album.id %}">{{ album }}</a></h2>
-                <img src="{{ album.album_logo }}" alt="{{ album }}">
-                <br><br>
-                <span>{{ album.genre }}</span>
-                <hr>
-            {% endfor %}
-        {% else %}
-            <h3>No albums to show you</h3>
-        {% endif %}
-    </div>
+    {% for album in all_albums %}
+        <h2><a href="{% url 'music:detail' album.id %}">{{ album }}</a></h2>
+        <img src="{{ album.album_logo }}" alt="{{ album }}">
+        <br><br>
+        <span>{{ album.genre }}</span>
+        <hr>
+    {% endfor %}
 {% endblock %}
