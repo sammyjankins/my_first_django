@@ -2,7 +2,7 @@
 {% block body %}
     {% for album in all_albums %}
         <h2><a href="{% url 'music:detail' album.id %}">{{ album }}</a></h2>
-        <img src="{{ album.album_logo }}" alt="{{ album }}">
+        <img src="{{ album.album_logo }}" alt="{{ album.album_logo }}">
         <br><br>
         <span>{{ album.genre }}</span>
         <hr>
