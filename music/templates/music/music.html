@@ -1,8 +1,10 @@
 {% extends 'music/base.html' %}
 {% block body %}
     {% for album in all_albums %}
-        <h2><a href="{% url 'music:detail' album.id %}">{{ album }}</a></h2>
-        <img src="{{ album.album_logo }}" alt="{{ album.album_logo }}">
+        <h2><a href="{% url 'music:detail' album.id %}"
+               onmouseover="this.style.color='{{ album.color }}'"
+               onmouseout="this.style.color='#3b5998'">{{ album }}</a></h2>
+        <img src="{{ album.album_logo }}" alt="{{ album.album_logo }}" width="400">
         <br><br>
         <span>{{ album.genre }}</span>
         <hr>

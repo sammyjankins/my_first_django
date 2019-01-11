@@ -1,8 +1,9 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.db import models
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 from requests import get
+from .process_color import *
 
 
 class Album(models.Model):
@@ -21,12 +22,13 @@ class Album(models.Model):
 
     def store_logo(self):
         resource = get(self.album_logo)
-        out = open('/home/sammyjankins/PycharmProjects/my_first_django/music/static/music/images/img{}.jpg'.
-                   format(self.pk), 'wb')
+        file = '/home/sammyjankins/PycharmProjects/my_first_django/music/static/music/images/img{}.jpg'. \
+            format(self.pk)
+        out = open(file, 'wb')
         out.write(resource.content)
         out.close()
-        self.album_logo = "../../static/music/images/img{}.jpg".\
-            format(self.pk)
+        self.album_logo = "../../static/music/images/img{}.jpg".format(self.pk)
+        self.color = get_main_color(file)
         self.save()
 
     def get_absolute_url(self):
