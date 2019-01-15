@@ -1,12 +1,32 @@
 {% extends 'music/base.html' %}
 {% block body %}
+
+    <div class="row">
+
+    <div class="col-sm-12">
+        <h3>SJ's Albums</h3>
+    </div>
+
     {% for album in all_albums %}
-        <h2><a href="{% url 'music:detail' album.id %}"
-               onmouseover="this.style.color='{{ album.color }}'"
-               onmouseout="this.style.color='#3b5998'">{{ album }}</a></h2>
-        <img src="{{ album.album_logo }}" alt="{{ album.album_logo }}" width="400">
-        <br><br>
-        <span>{{ album.genre }}</span>
-        <hr>
+        <div class="col-sm-6 col-lg-3">
+            <div class="card border-{{ album.borger_color }}">
+                <div class="card-header  text-center">
+                    <h2>{{ album.album_title }}</h2>
+                    <h4>{{ album.artist }}</h4>
+                </div>
+                <a href="{% url 'music:detail' album.id %}">
+                    <img src="{{ album.album_logo }}" alt="{{ album.album_logo }}"
+                         class="card-img-top"
+                         width="400">
+                </a>
+                <div class="card-body">
+                     <a href="{% url 'music:detail' album.id %}" class="btn btn-{{ album.borger_color }} btn-sm" role="button">
+                         View Details</a>
+                     <span>{{ album.genre }}</span>
+                </div>
+            </div>
+        </div>
     {% endfor %}
+    </div>
+
 {% endblock %}

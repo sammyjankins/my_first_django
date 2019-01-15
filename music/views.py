@@ -3,6 +3,7 @@ from __future__ import unicode_literals
 from django.views import generic
 from .models import Album
 from django.views.generic.edit import CreateView, UpdateView, DeleteView
+# from django.core.urlresolvers import reverse_lazy
 
 
 class IndexView(generic.ListView):

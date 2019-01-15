@@ -2,7 +2,6 @@
 from operator import mul
 from functools import reduce
 from PIL import Image
-from colorsys import rgb_to_hls
 
 
 def prod(iterable):
@@ -20,14 +19,29 @@ def get_main_color(img_path):
     try:
         for c in colors:
             hsl = rgb_to_hls(*c[1])
-            if c[0] > max_occurence and (hsl[1] > 60 and hsl[2] > -1):
+            if c[0] > max_occurence and ((130 < hsl[1] < 200) and hsl[2] > -1):
                 (max_occurence, most_present) = c
         if most_present == 0:
             most_present = (59, 89, 152)
         main_color = most_present
     except TypeError:
         return '#3b5998'
-    return '#' + rgb_to_hex(*main_color)
+    return ['#' + rgb_to_hex(*main_color), rgb_to_hls(*main_color)[0]]
+
+
+def get_border_color(hue):
+    if hue < 0.111:
+        return 'danger'
+    elif 0.111 <= hue < 0.194:
+        return 'warning'
+    elif 0.194 <= hue < 0.388:
+        return 'success'
+    elif 0.388 <= hue < 0.527:
+        return 'info'
+    elif 0.527 <= hue < 0.722:
+        return 'primary'
+    else:
+        return 'dark'
 
 
 def rgb_to_hls(r, g, b):

@@ -14,6 +14,7 @@ class Album(models.Model):
     file_type = models.CharField(max_length=10)
     facebook = models.CharField(max_length=1000)
     color = models.CharField(max_length=10)
+    borger_color = models.CharField(max_length=15)
 
     def __init__(self, *args, **kwargs):
         models.Model.__init__(self, *args, **kwargs)
@@ -28,7 +29,9 @@ class Album(models.Model):
         out.write(resource.content)
         out.close()
         self.album_logo = "../../static/music/images/img{}.jpg".format(self.pk)
-        self.color = get_main_color(file)
+        color_data = get_main_color(file)
+        self.color = color_data[0]
+        self.borger_color = get_border_color(color_data[1])
         self.save()
 
     def get_absolute_url(self):
