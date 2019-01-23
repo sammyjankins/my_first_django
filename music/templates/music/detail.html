@@ -2,7 +2,7 @@
 {% block title %}Album Details{% endblock %}
 {% block body %}
 
-    <img src="{{ album.album_logo }}" alt="{{ album }}" width="400"><br>
+    <img src="{{ album.album_logo.url }}" alt="{{ album }}" width="400"><br>
     <h3>{{ album }}</h3>
     <span>Genre: {{ album.genre }}</span><br>
     <span>Format: {{ album.file_type }}</span>

@@ -17,7 +17,7 @@
                     <h4>{{ album.artist }}</h4>
                 </div>
                 <a href="{% url 'music:detail' album.id %}">
-                    <img src="{{ album.album_logo }}" alt="{{ album.album_logo }}"
+                    <img src="{{ album.album_logo.url }}" alt="{{ album.album_logo.url }}"
                          class="card-img-top"
                          width="400">
                 </a>
