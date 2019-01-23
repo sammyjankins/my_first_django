@@ -29,19 +29,25 @@ def get_main_color(img_path):
     return ['#' + rgb_to_hex(*main_color), rgb_to_hls(*main_color)[0]]
 
 
+COLORS = {
+    'blue': (0.5862745098039216, 0.6333333333333333),  # 007bff
+    'indigo': (0.6333333333333333, 0.7137254901960784),  # 6610f2
+    'purple': (0.7137254901960784, 0.8052287581699346),  # 6f42c1
+    'pink': (0.8052287581699346, 0.919607843137255),  # e83e8c
+    'red': (0.919607843137255, 1),  # dc3545
+    'red1': (0, 0.024836601307189548),  # dc3545
+    'orange': (0.024836601307189548, 0.11372549019607843),  # fd7e14
+    'yellow': (0.11372549019607843, 0.2333333333333333),  # ffc107
+    'green': (0.2333333333333333, 0.39999999999999997),  # 28a745
+    'teal': (0.39999999999999997, 0.50),  # 20c997
+    'cyan': (0.50, 0.5862745098039216)  # 17a2b8
+}
+
+
 def get_border_color(hue):
-    if hue < 0.111:
-        return 'danger'
-    elif 0.111 <= hue < 0.194:
-        return 'warning'
-    elif 0.194 <= hue < 0.388:
-        return 'success'
-    elif 0.388 <= hue < 0.527:
-        return 'info'
-    elif 0.527 <= hue < 0.722:
-        return 'primary'
-    else:
-        return 'dark'
+    for key, value in COLORS.items():
+        if value[0] <= hue < value[1]:
+            return key
 
 
 def rgb_to_hls(r, g, b):

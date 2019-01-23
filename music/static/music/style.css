@@ -14,3 +14,214 @@ body{
 .fa-facebook-square{
     color: #B0B0B0;
 }
+
+.fa-gripfire  {
+    color: #f8f9fa;
+}
+
+.fa-gripfire:hover,
+.fa-gripfire:active,
+.fa-gripfire:focus{
+    color: #fd7e14;
+}
+
+.btn-outline-blue,
+.btn-outline-indigo,
+.btn-outline-purple,
+.btn-outline-pink,
+.btn-outline-red,
+.btn-outline-red1,
+.btn-outline-orange,
+.btn-outline-yellow,
+.btn-outline-green,
+.btn-outline-teal,
+.btn-outline-cyan{
+
+color: #f8f9fa;
+
+background-color: #343a40;
+
+border-color: #f8f9fa;
+
+font-weight: bold;
+
+letter-spacing: 0.05em;
+
+}
+
+.btn-outline-blue:hover,
+.btn-outline-blue:active,
+.btn-outline-blue:focus{
+
+background: #007bff;
+
+color: #ffffff;
+
+border-color: #007bff;
+
+}
+
+.btn-outline-indigo:hover,
+.btn-outline-indigo:active,
+.btn-outline-indigo:focus{
+background: #6610f2;
+color: #ffffff;
+border-color: #6610f2;
+
+}
+
+.btn-outline-purple:hover,
+.btn-outline-purple:active,
+.btn-outline-purple:focus{
+background: #6f42c1;
+color: #ffffff;
+border-color: #6f42c1;
+
+}
+
+.btn-outline-pink:hover,
+.btn-outline-pink:active,
+.btn-outline-pink:focus{
+background: #e83e8c;
+color: #000000;
+border-color: #e83e8c;
+
+}
+
+.btn-outline-red:hover,
+.btn-outline-red:active,
+.btn-outline-red:focus{
+background: #dc3545;
+color: #ffffff;
+border-color: #dc3545;
+
+}
+
+.btn-outline-red1:hover,
+.btn-outline-red1:active,
+.btn-outline-red1:focus{
+background: #dc3545;
+color: #ffffff;
+border-color: #dc3545;
+
+}
+
+.btn-outline-orange:hover,
+.btn-outline-orange:active,
+.btn-outline-orange:focus{
+background: #fd7e14;
+color: #000000;
+border-color: #fd7e14;
+
+}
+
+.btn-outline-yellow:hover,
+.btn-outline-yellow:active,
+.btn-outline-yellow:focus{
+background: #ffc107;
+color: #000000;
+border-color: #ffc107;
+
+}
+
+.btn-outline-green:hover,
+.btn-outline-green:active,
+.btn-outline-green:focus{
+background: #28a745;
+color: #ffffff;
+border-color: #28a745;
+
+}
+
+.btn-outline-teal:hover,
+.btn-outline-teal:active,
+.btn-outline-teal:focus{
+background: #20c997;
+color: #ffffff;
+border-color: #20c997;
+
+}
+
+.btn-outline-cyan:hover,
+.btn-outline-cyan:active,
+.btn-outline-cyan:focus{
+background: #17a2b8;
+color: #000000;
+border-color: #17a2b8;
+
+}
+
+.card-blue,
+.card-indigo,
+.card-purple,
+.card-pink,
+.card-red,
+.card-red1,
+.card-orange,
+.card-yellow,
+.card-green,
+.card-teal,
+.card-cyan{
+    border-color: grey;
+}
+
+.card-blue:hover{
+    border-color: #007bff;
+}
+.card-indigo:hover{
+    border-color: #6610f2;
+}
+.card-purple:hover{
+    border-color: #6f42c1;
+}
+.card-pink:hover{
+    border-color: #e83e8c;
+}
+.card-red:hover{
+    border-color: #dc3545;
+}
+.card-red1:hover{
+    border-color: #dc3545;
+}
+.card-orange:hover{
+    border-color: #fd7e14;
+}
+.card-yellow:hover{
+    border-color: #ffc107;
+}
+.card-green:hover{
+    border-color: #28a745;
+}
+.card-teal:hover{
+    border-color: #20c997;
+}
+.card-cyan:hover{
+    border-color: #17a2b8;
+}
+
+.btn-link {
+    margin: 0;
+    padding: 0;
+    color: #f8f9fa;
+}
+
+.btn-link:hover,
+.btn-link:active,
+.btn-link:focus {
+    color: #f8f9fa;
+}
+
+.yellow:hover button,
+.yellow:active button,
+.yellow:focus button,
+.pink:hover button,
+.pink:active button,
+.pink:focus button,
+.orange:hover button,
+.orange:active button,
+.orange:focus button,
+.cyan:focus button,
+.cyan:hover button,
+.cyan:active button{
+    color: #000000;
+}
