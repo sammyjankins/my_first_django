@@ -2,18 +2,21 @@
 from __future__ import unicode_literals
 from django.db import models
 from django.urls import reverse
-from requests import get
 from .process_color import *
+
+from django.contrib.auth.models import Permission, User
 
 
 class Album(models.Model):
+    user = models.ForeignKey(User, default=1, on_delete=models.SET_NULL, null=True)
     artist = models.CharField(max_length=250)
     album_title = models.CharField(max_length=500)
     genre = models.CharField(max_length=100)
-    facebook = models.CharField(max_length=1000)
+    facebook = models.CharField(max_length=200)
     color = models.CharField(max_length=10)
     border_color = models.CharField(max_length=15)
     album_logo = models.FileField()
+    is_favorite = models.BooleanField(default=False)
 
     def __init__(self, *args, **kwargs):
         models.Model.__init__(self, *args, **kwargs)
@@ -35,6 +38,7 @@ class Album(models.Model):
 
 class Song(models.Model):
     album = models.ForeignKey(Album, on_delete=models.CASCADE)
+    audio_file = models.FileField(default='')
     song_title = models.CharField(max_length=250)
     is_favorite = models.BooleanField(default=False)
 

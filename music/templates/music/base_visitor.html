@@ -34,24 +34,29 @@
                 <span class="navbar-toggler-icon"></span>
             </button>
 
-
-
              <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
                 <ul class="navbar-nav mr-auto">
 
-                  <li class="{% block albums_active %}{% endblock %}"><a class="nav-link mr-3" href="{%  url 'music:index' %}">
-                        <i class="fas fa-compact-disc"></i>&nbsp;Albums</a>
-                  </li>
-                  <li class="{% block songs_active %}{% endblock %}"><a class="nav-link" href="#">
-                      <i class="fas fa-music"></i>&nbsp; Songs</a>
+                  <li class="nav-item">
+                    <a class="nav-link mr-3" href="{%  url 'music:index' %}">
+                        <i class="fas fa-compact-disc"></i>&nbsp;
+                        Albums
+                    </a>
                   </li>
 
-                </ul>
+                    <li class="nav-item">
+                      <a class="nav-link" href="#">
+                            <i class="fas fa-music"></i>&nbsp;
+                          Songs
+                      </a>
+                  </li>
+
+                 </ul>
 
                  <ul class="navbar-nav mr-3">
                      <li class="nav-item" >
-                         <a class="nav-link pl-0 mr-3" href="{% url 'music:create_album' %}">
+                         <a class="nav-link pl-0 mr-3" href="{% url 'music:album-add' %}">
                             <i class="far fa-plus-square"></i>&nbsp;
                             Add Album
                          </a>

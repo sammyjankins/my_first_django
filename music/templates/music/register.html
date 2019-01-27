@@ -1,0 +1,25 @@
+{% extends 'music/base.html' %}
+{% block title %}Register{% endblock %}
+
+{% block body %}
+    <div class="container-fluid">
+        <div class="col-sm-12 col-md-7">
+            <div class="card" style="width: 50rem;">
+                <div class="card-header  text-center">
+                    <h2>Create a New Account</h2>
+                </div>
+                <div class="card-body">
+                    <form action="" method="post" enctype="multipart/form-data">
+                        {% csrf_token %}
+                        {% include 'music/form-template.html' %}
+                        <div class="form-group">
+                            <div class="col-sm-offset-2 col-sm-10">
+                                <button type="submit" class="btn btn-warning">Submit</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
