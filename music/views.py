@@ -1,19 +1,20 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from django.views import generic
 from .models import Album, Song
-from django.views.generic.edit import CreateView, UpdateView, DeleteView
-from django.shortcuts import render, get_object_or_404
-from django.contrib.auth import authenticate, login, logout
-from .forms import UserForm, AlbumForm
+from django.views.generic.edit import UpdateView
+from django.shortcuts import render, get_object_or_404, redirect
+from .forms import AlbumForm, SongForm, UserRegForm
+from django.contrib import messages
 from django.db.models import Q
+from django.http import JsonResponse
 
 AUDIO_FILE_TYPES = ['wav', 'mp3', 'ogg']
 IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
 
+
 def index(request):
     if not request.user.is_authenticated:
-        return render(request, 'music/login.html')
+        return redirect('music:register')
     else:
         albums = Album.objects.filter(user=request.user)
         song_results = Song.objects.all()
@@ -36,7 +37,7 @@ def index(request):
 
 def create_album(request):
     if not request.user.is_authenticated:
-        return render(request, 'music/login.html')
+        return redirect('music:register')
     else:
         form = AlbumForm(request.POST or None, request.FILES or None)
         if form.is_valid():
@@ -60,9 +61,44 @@ def create_album(request):
     return render(request, 'music/album_form.html', context)
 
 
+def create_song(request, album_id):
+    form = SongForm(request.POST or None, request.FILES or None)
+    album = get_object_or_404(Album, pk=album_id)
+    if form.is_valid():
+        albums_songs = album.song_set.all()
+        for s in albums_songs:
+            if s.song_title == form.cleaned_data.get("song_title"):
+                context = {
+                    'album': album,
+                    'form': form,
+                    'error_message': 'You already added that song',
+                }
+                return render(request, 'music/create_song.html', context)
+        song = form.save(commit=False)
+        song.album = album
+        song.audio_file = request.FILES['audio_file']
+        file_type = song.audio_file.url.split('.')[-1]
+        file_type = file_type.lower()
+        if file_type not in AUDIO_FILE_TYPES:
+            context = {
+                'album': album,
+                'form': form,
+                'error_message': 'Audio file must be WAV, MP3, or OGG',
+            }
+            return render(request, 'music/create_song.html', context)
+
+        song.save()
+        return render(request, 'music/detail.html', {'album': album})
+    context = {
+        'album': album,
+        'form': form,
+    }
+    return render(request, 'music/create_song.html', context)
+
+
 def detail(request, album_id):
     if not request.user.is_authenticated:
-        return render(request, 'music/login.html')
+        return redirect('music:register')
     else:
         user = request.user
         album = get_object_or_404(Album, pk=album_id)
@@ -72,54 +108,38 @@ def detail(request, album_id):
 def delete_album(request, album_id):
     album = Album.objects.get(pk=album_id)
     album.delete()
-    albums = Album.objects.filter(user=request.user)
-    return render(request, 'music/index.html', {'albums': albums})
+    # albums = Album.objects.filter(user=request.user)
+    return redirect('../../')
+    # return render(request, 'music/index.html', {'albums': albums})
+
+
+def favorite_album(request, album_id):
+    album = get_object_or_404(Album, pk=album_id)
+    try:
+        if album.is_favorite:
+            album.is_favorite = False
+        else:
+            album.is_favorite = True
+        album.save()
+    except (KeyError, Album.DoesNotExist):
+        return JsonResponse({'success': False})
+    else:
+        albums = Album.objects.filter(user=request.user)
+        return render(request, 'music/index.html', {'albums': albums})
+        # return JsonResponse({'success': True})
 
 
 def register(request):
-    form = UserForm(request.POST or None)
-    if form.is_valid():
-        user = form.save(commit=False)
-        username = form.cleaned_data['username']
-        password = form.cleaned_data['password']
-        user.set_password(password)
-        user.save()
-        user = authenticate(username=username, password=password)
-        if user is not None:
-            if user.is_active:
-                login(request, user)
-                albums = Album.objects.filter(user=request.user)
-                return render(request, 'music/index.html', {'albums': albums})
-    context = {
-        "form": form,
-    }
-    return render(request, 'music/register.html', context)
-
-
-def login_user(request):
-    if request.method == "POST":
-        username = request.POST['username']
-        password = request.POST['password']
-        user = authenticate(username=username, password=password)
-        if user is not None:
-            if user.is_active:
-                login(request, user)
-                albums = Album.objects.filter(user=request.user)
-                return render(request, 'music/index.html', {'albums': albums})
-            else:
-                return render(request, 'music/login.html', {'error_message': 'Your account has been disabled'})
-        else:
-            return render(request, 'music/login.html', {'error_message': 'Invalid login'})
-    return render(request, 'music/login.html')
-
-
-def logout_user(request):
-    logout(request)
-    form = UserForm(request.POST or None)
-    context = {
-        "form": form,
-    }
-    return render(request, 'music/login.html', context)
+    if request.method == 'POST':
+        form = UserRegForm(request.POST)
+        if form.is_valid():
+            form.save()
+            username = form.cleaned_data.get('username')
+            messages.success(request, 'Welcome, {}'.format(username))
+            return redirect('music:index')
+    else:
+        form = UserRegForm()
+    return render(request, 'music/register.html', {'form': form})
 
 
 class AlbumUpdate(UpdateView):

@@ -25,6 +25,10 @@ body{
     color: #fd7e14;
 }
 
+.active{
+    color: #fd7e14;
+}
+
 .btn-outline-blue,
 .btn-outline-indigo,
 .btn-outline-purple,
@@ -224,4 +228,12 @@ border-color: #17a2b8;
 .cyan:hover button,
 .cyan:active button{
     color: #000000;
+}
+
+@media (min-width: 960px){
+    #navcustom{
+        position: sticky;
+        top: 0;
+        z-index: 1;
+    }
 }

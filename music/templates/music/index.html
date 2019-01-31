@@ -6,12 +6,12 @@
     <div class="row">
 
     <div class="col-sm-12">
-        <h3>SJ's Albums</h3>
+        <h3>{{ user.username }}'s Albums</h3>
     </div>
 
     {% for album in albums %}
-        <div class="col-sm-6 col-lg-3 my-3">
-            <div class='card card-{{ album.border_color }} bg-dark text-white'>
+        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 my-3">
+            <div class='card card-{{ album.border_color }} bg-dark text-white mw-20'>
                 <div class="card-header  text-center">
                     <h2>{{ album.album_title }}</h2>
                     <h4>{{ album.artist }}</h4>
@@ -43,11 +43,12 @@
                                      <i class="fas fa-trash-alt"></i>
                                  </button>
 
-                         </form>
+                          </form>
 
                      </div>
-                     <a href="#" data-toggle="tooltip" data-placement="top" title="Favorite">
-                         <i class="fab fa-gripfire fa-2x"></i>
+                     <a href="{% url 'music:favorite_album' album.id %}"
+                        data-toggle="tooltip" data-placement="top" title="Favorite">
+                         <i class="fab fa-gripfire fa-2x {% if album.is_favorite %}active{% endif %}"></i>
                      </a>
                     </div>
                 </div>
