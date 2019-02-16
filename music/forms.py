@@ -15,7 +15,7 @@ class UserRegForm(UserCreationForm):
 class AlbumForm(forms.ModelForm):
     class Meta:
         model = Album
-        fields = ['artist', 'album_title', 'genre', 'facebook', 'album_logo']
+        fields = ['artist', 'album_title', 'genre', 'facebook', 'bandcamp', 'lastfm', 'album_logo']
 
 
 class SongForm(forms.ModelForm):

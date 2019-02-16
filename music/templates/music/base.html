@@ -2,6 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>{% block title %}SJ music{% endblock %}</title>
     {%  load staticfiles %}
     <link rel="stylesheet"
@@ -10,6 +11,7 @@
           crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="{% static 'music/style.css' %}">
     <link href="https://fonts.googleapis.com/css?family=Pacifico" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
           integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
           crossorigin="anonymous">
@@ -19,6 +21,10 @@
             crossorigin="anonymous"></script>
 </head>
 <body>
+    <div class="section d-none d-sm-none d-md-block">
+        <button onclick="topFunction()" id="myBtn"><i class="fas fa-arrow-up"></i></button>
+        <span id="topWord">TOP</span>
+    </div>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5" id="navcustom">
     <div class="container-fluid">
 
@@ -31,7 +37,7 @@
             {% endif %}
 
             {% if user.is_authenticated %}
-            <button class="navbar-toggler"
+            <button class="navbar-toggler collapsed"
                     type="button"
                     data-toggle="collapse"
                     data-target="#navbarSupportedContent"
@@ -93,7 +99,51 @@
             {% endif %}
   </div>
 </nav>
-{% block body %}
+{% block content %}
 {% endblock %}
 </body>
+
+<section id="footer" class="mt-5">
+    <div class="container">
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 mt-5 mt-sm-5">
+                <ul class="list-unstyled list-inline social text-center">
+                    <li class="list-inline-item mx-2"><a href="#"><i class="fab fa-vk"></i></a></li>
+                    <li class="list-inline-item mx-2"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
+                    <li class="list-inline-item mx-2"><a href="#"><i class="fab fa-github-alt"></i></a></li>
+                    <li class="list-inline-item mx-2"><a href="#"><i class="fab fa-telegram-plane"></i></a></li>
+                    <li class="list-inline-item mx-2"><a href="#"><i class="far fa-envelope"></i></a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
+                <p><u><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Sounds Of Imbalance</a></u>&nbsp; sleeps through The NE/VER the Artificial, Lightsource Is. Creeping [with flies and this time I.B. Reak, I Will, NE]</p>
+                <p class="h6">&ver Make another Day.<a class="text-green ml-2" href="https://vlterno.github.io/thingstatus.com/" target="_blank">DefiantToWhat'sDelivered</a></p>
+                <button onclick="topFunction()"
+            class="btn btn-secondary btn-lg btn-block d-block d-sm-block d-md-none"
+            id="smBtn">^</button>
+            </div>
+        </div>
+    </div>
+</section>
+<script>
+
+    // When the user scrolls down 20px from the top of the document, show the button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+  if (document.body.scrollTop > 100 || document.documentElement.scrollTop > 100) {
+    document.getElementById("myBtn").style.display = "block";
+  } else {
+    document.getElementById("myBtn").style.display = "none";
+  }
+}
+
+// When the user clicks on the button, scroll to the top of the document
+function topFunction() {
+  document.body.scrollTop = 0;
+  document.documentElement.scrollTop = 0;
+}
+</script>
 </html>

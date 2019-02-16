@@ -1,17 +1,17 @@
 {% extends 'music/base.html' %}
-{% block body %}
-
+{% block content %}
+<div class="content-cust">
     <div class="albums-container container-fluid">
 
-    <div class="row">
+    <div class="row justify-content-between">
 
-    <div class="col-sm-12">
+    <div class="col-xs-12 col-sm-12">
         <h3>{{ user.username }}'s Albums</h3>
     </div>
 
     {% for album in albums %}
-        <div class="col-xs-12 col-sm-6 col-md-6 col-lg-4 col-xl-3 my-3">
-            <div class='card card-{{ album.border_color }} bg-dark text-white mw-20'>
+        <div class="col-12 col-sm-5 col-md-6 col-lg-4 my-3">
+            <div class='card card-{{ album.border_color }} bg-dark text-white mx-auto' style="min-width: 20em; max-width: 30em">
                 <div class="card-header  text-center">
                     <h2>{{ album.album_title }}</h2>
                     <h4>{{ album.artist }}</h4>
@@ -23,13 +23,13 @@
                 </a>
                 <div class="card-body">
                     <div class="row justify-content-between mx-1">
-                     <div class="btn-group" role="group" aria-label="Basic example">
+                     <div class="btn-group" role="group">
 
-                          <a href="{% url 'music:detail' album.id %}" type="button"
-                             class="btn btn-outline-{{ album.border_color}} btn-sm">View Details</a>
+                          <a href="{% url 'music:detail' album.id %}"
+                             class="btn btn-outline-{{ album.border_color}} btn-sm pt-2">View Details</a>
 
 
-                          <a href="#" type="button" class="btn btn-outline-{{ album.border_color}} btn-sm"
+                          <a href="#"  class="btn btn-outline-{{ album.border_color}} btn-sm pt-2"
                           data-toggle="tooltip" data-placement="top" title="Edit"><i class="fas fa-pen"></i></a>
 
 
@@ -55,6 +55,7 @@
             </div>
         </div>
     {% endfor %}
+    </div>
     </div>
     </div>
 {% endblock %}

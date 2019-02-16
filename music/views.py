@@ -113,6 +113,29 @@ def delete_album(request, album_id):
     # return render(request, 'music/index.html', {'albums': albums})
 
 
+def delete_song(request, album_id, song_id):
+    album = get_object_or_404(Album, pk=album_id)
+    song = Song.objects.get(pk=song_id)
+    song.delete()
+    return render(request, 'music/detail.html', {'album': album})
+
+
+def favorite(request, song_id):
+    song = get_object_or_404(Song, pk=song_id)
+    album = song.album
+    try:
+        if song.is_favorite:
+            song.is_favorite = False
+        else:
+            song.is_favorite = True
+        song.save()
+    except (KeyError, Song.DoesNotExist):
+        return JsonResponse({'success': False})
+    else:
+        #return JsonResponse({'success': True})
+        return render(request, 'music/detail.html', {'album': album})
+
+
 def favorite_album(request, album_id):
     album = get_object_or_404(Album, pk=album_id)
     try:
