@@ -24,5 +24,4 @@ urlpatterns = [
     url(r'album/(?P<pk>[0-9]+)/$', views.AlbumUpdate.as_view(), name='album-update'),
     url(r'^(?P<album_id>[0-9]+)/favorite_album/$', views.favorite_album, name='favorite_album'),
     url(r'^(?P<song_id>[0-9]+)/favorite/$', views.favorite, name='favorite'),
-
 ]

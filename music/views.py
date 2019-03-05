@@ -132,7 +132,7 @@ def favorite(request, song_id):
     except (KeyError, Song.DoesNotExist):
         return JsonResponse({'success': False})
     else:
-        #return JsonResponse({'success': True})
+        # return JsonResponse({'success': True})
         return render(request, 'music/detail.html', {'album': album})
 
 
@@ -168,3 +168,4 @@ def register(request):
 class AlbumUpdate(UpdateView):
     model = Album
     fields = ['artist', 'album_title', 'genre', 'album_logo', 'facebook']
+

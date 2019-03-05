@@ -1,17 +1,32 @@
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 
+html, body{
+    overflow: auto;
+    min-height: 100%;
+    margin: 0;
+}
+
 body {
     background: white url("images/background.jpg");
     font-family: 'Roboto', sans-serif;
-
-
+    min-height: 100vh;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: flex-start;
 }
+.body-content{
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
 .content-cust{
   min-height: calc(100vh - 335px);
 }
 .navbar .container-fluid .navbar-brand {
     font-family: 'Pacifico', cursive;
 }
+
+
 
 .navbar .container-fluid .navbar-brand:hover,
 .navbar .container-fluid .navbar-brand:focus {
@@ -54,11 +69,15 @@ body {
     transition: .3s all ease;
 }
 
-.fa-gripfire:hover,
-.fa-gripfire:active,
-.fa-gripfire:focus {
+.fa-gripfire-x {
+    color: #f8f9fa;
+}
+
+.fa-gripfire-x:hover,
+.fa-gripfire-x:active,
+.fa-gripfire-x:focus {
     color: #fd7e14;
-    font-size: 20px;
+    font-size: 40px;
     margin-top: -7px;
     margin-right: -3px;
 }
@@ -87,7 +106,14 @@ body {
     font-weight: bold;
 
     letter-spacing: 0.05em;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
 
+.bo-plr{
+    border-top: none;
+    border-bottom: none;
 }
 
 .btn-outline-blue:hover,
@@ -158,11 +184,10 @@ body {
 
 .btn-outline-yellow:hover,
 .btn-outline-yellow:active,
-.btn-outline-yellow:focus {
+.btn-outline-yellow:focus{
     background: #ffc107;
     color: #000000;
     border-color: #ffc107;
-
 }
 
 .btn-outline-green:hover,
@@ -191,6 +216,61 @@ body {
     border-color: #17a2b8;
 
 }
+
+/* Button-outline icons */
+
+.btn-outline-yellow:hover .fa-gripfire,
+.btn-outline-yellow:hover .fa-trash-alt,
+.btn-outline-yellow:hover .btn-link,
+.btn-outline-yellow:active .fa-gripfire,
+.btn-outline-yellow:active .fa-trash-alt,
+.btn-outline-yellow:active .btn-link,
+.btn-outline-yellow:focus .fa-gripfire,
+.btn-outline-yellow:focus .fa-trash-alt,
+.btn-outline-yellow:focus .btn-link,
+.btn-outline-pink:hover .fa-gripfire,
+.btn-outline-pink:hover .fa-trash-alt,
+.btn-outline-pink:hover .btn-link,
+.btn-outline-pink:active .fa-gripfire,
+.btn-outline-pink:active .fa-trash-alt,
+.btn-outline-pink:active .btn-link,
+.btn-outline-pink:focus .fa-gripfire,
+.btn-outline-pink:focus .fa-trash-alt,
+.btn-outline-pink:focus .btn-link,
+.btn-outline-orange:hover .fa-gripfire,
+.btn-outline-orange:hover .fa-trash-alt,
+.btn-outline-orange:hover .btn-link,
+.btn-outline-orange:active .fa-gripfire,
+.btn-outline-orange:active .fa-trash-alt,
+.btn-outline-orange:active .btn-link,
+.btn-outline-orange:focus .fa-gripfire,
+.btn-outline-orange:focus .fa-trash-alt,
+.btn-outline-orange:focus .btn-link,
+.btn-outline-cyan:hover .fa-gripfire,
+.btn-outline-cyan:hover .fa-trash-alt,
+.btn-outline-cyan:hover .btn-link,
+.btn-outline-cyan:active .fa-gripfire,
+.btn-outline-cyan:active .fa-trash-alt,
+.btn-outline-cyan:active .btn-link,
+.btn-outline-cyan:focus .fa-gripfire,
+.btn-outline-cyan:focus .fa-trash-alt,
+.btn-outline-cyan:focus .btn-link,
+.btn-outline-yellow:hover .fa-pen,
+.btn-outline-yellow:active .fa-pen,
+.btn-outline-yellow:focus .fa-pen,
+.btn-outline-pink:hover .fa-pen,
+.btn-outline-pink:active .fa-pen,
+.btn-outline-pink:focus .fa-pen,
+.btn-outline-orange:hover .fa-pen,
+.btn-outline-orange:active .fa-pen,
+.btn-outline-orange:focus .fa-pen,
+.btn-outline-cyan:hover .fa-pen,
+.btn-outline-cyan:active .fa-pen,
+.btn-outline-cyan:focus .fa-pen{
+    color: black;
+}
+
+
 
 .card-blue,
 .card-indigo,
@@ -255,12 +335,19 @@ body {
     margin: 0;
     padding: 0;
     color: #f8f9fa;
+    font-weight: bold;
 }
+
+.fa-trash-alt{
+    color: #f8f9fa;
+}
+
 
 .btn-link:hover,
 .btn-link:active,
 .btn-link:focus {
-    color: #f8f9fa;
+    font-style: normal;
+    text-decoration: none;
 }
 
 .yellow:hover button,
@@ -290,6 +377,8 @@ body {
 
 section {
     padding-bottom: 10px;
+    margin-top: auto;
+    width: 100%;
 }
 
 #footer {
@@ -379,3 +468,4 @@ section {
     opacity: 1;
     transition: 1s;
 }
+

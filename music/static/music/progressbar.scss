@@ -1,0 +1,147 @@
+$playerColor: #343a40;
+
+.playerContainer{
+  padding-top: 7px;
+}
+.timing{
+  font-size: 0.8rem;
+  text-align: right;
+}
+.info{
+  overflow: hidden;
+  &:hover{
+    .text-yellow{
+      text-shadow: 0 0 2px yellow;
+    }
+    .text-red{
+      text-shadow: 0 0 2px red;
+    }
+    .text-red1{
+      text-shadow: 0 0 2px red;
+    }
+    .text-blue{
+      text-shadow: 0 0 2px blue;
+    }
+    .text-indigo{
+      text-shadow: 0 0 2px #6610f2;
+    }
+    .text-purple{
+      text-shadow: 0 0 2px #6f42c1;
+    }
+    .text-pink{
+      text-shadow: 0 0 2px #e83e8c;
+    }
+    .text-orange{
+      text-shadow: 0 0 2px orange;
+    }
+    .text-green{
+      text-shadow: 0 0 2px green;
+    }
+    .text-cyan{
+      text-shadow: 0 0 2px cyan;
+    }
+    .text-teal{
+      text-shadow: 0 0 2px teal;
+    }
+  }
+}
+.seekBar{
+  margin-top: 5px;
+  display: flex;
+  justify-content: flex-start;
+  align-content: center;
+  .outer{
+    overflow: hidden;
+    border: 1px solid $playerColor;
+    border-radius: 2px;
+    display: flex;
+    height: 0.5rem;
+    flex-basis: 100%;
+    justify-content: flex-start;
+    background-color: darken($playerColor, 7%);
+    .progress{
+      margin-bottom: 0px;
+      margin-top: 0px;
+      width: 0%;
+      height: 5px;
+      background: #006b5a;
+      transition: width .1s linear;
+    }
+    .progress-yellow{
+      background:  yellow;
+    }
+    .progress-red{
+      background:  red;
+    }
+    .progress-red1{
+      background:  red;
+    }
+    .progress-blue{
+      background:  blue;
+    }
+    .progress-indigo{
+      background:  #6610f2;
+    }
+    .progress-purple{
+      background:  #6f42c1;
+    }
+    .progress-pink{
+      background:  #e83e8c;
+    }
+    .progress-orange{
+      background:  orange;
+    }
+    .progress-green{
+      background:  green;
+    }
+    .progress-cyan{
+      background:  cyan;
+    }
+    .progress-teal{
+      background:  teal;
+    }
+    &:hover{
+      cursor: pointer;
+    }
+  }
+}
+
+.playbutton{
+  display: inline-block;
+  -moz-transition: all ease 0.5s;
+  -webkit-transition: all ease 0.5s;
+  transition: all ease 0.5s;
+  &.play{
+    .fa-pause{
+      display: none;
+    }
+  }
+  &.pause{
+    -moz-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+    .fa-play{
+      display: none;
+    }
+  }
+}
+
+.fa-times-circle {
+  font-size: 1.3rem;
+  padding: 3px 3px;
+}
+.nav-button{
+  transition: all ease 0.5s;
+  &.nav-closed{
+    .fa-times-circle{
+      display: none;
+    }
+  }
+  &.nav-opened{
+    transform: rotate(180deg);
+    .navbar-toggler-icon{
+      display: none;
+    }
+  }
+
+}

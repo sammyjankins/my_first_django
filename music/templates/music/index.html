@@ -11,7 +11,7 @@
 
     {% for album in albums %}
         <div class="col-12 col-sm-5 col-md-6 col-lg-4 my-3">
-            <div class='card card-{{ album.border_color }} bg-dark text-white mx-auto' style="min-width: 20em; max-width: 30em">
+            <div class='card card-{{ album.border_color }} alb-card bg-dark text-white mx-auto' style="min-width: 20em; max-width: 30em">
                 <div class="card-header  text-center">
                     <h2>{{ album.album_title }}</h2>
                     <h4>{{ album.artist }}</h4>
@@ -48,7 +48,7 @@
                      </div>
                      <a href="{% url 'music:favorite_album' album.id %}"
                         data-toggle="tooltip" data-placement="top" title="Favorite">
-                         <i class="fab fa-gripfire fa-2x {% if album.is_favorite %}active{% endif %}"></i>
+                         <i class="fab fa-gripfire fa-gripfire-x fa-2x {% if album.is_favorite %}active{% endif %}"></i>
                      </a>
                     </div>
                 </div>
