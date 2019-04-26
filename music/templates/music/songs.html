@@ -1,4 +1,6 @@
 {% extends 'music/base.html' %}
+{% block title %}All Songs{% endblock %}
+{% block songs_active %}active{% endblock %}
 {% block content %}
 <div class="content-cust">
     <div class="albums-container container-fluid">
@@ -6,60 +8,12 @@
     <div class="row justify-content-between">
 
     <div class="col-xs-12 col-sm-12">
-        <h3>{{ user.username }}'s Albums</h3>
+        <h3>{{ user.username }}'s songs</h3>
     </div>
 
-    {% for album in albums %}
-        <div class="col-12 col-sm-5 col-md-6 col-lg-4 my-3">
-            <div class='card card-{{ album.border_color }} alb-card bg-dark text-white mx-auto' style="min-width: 20em; max-width: 30em">
-                <div class="card-header  text-center">
-                    <h3>{{ album.album_title }}</h3>
-                    <h5>{{ album.artist }}</h5>
-                </div>
-                <a href="{% url 'music:detail' album.id %}">
-                    <img src="{{ album.album_logo.url }}" alt="{{ album.album_logo.url }}"
-                         class="card-img-top"
-                         width="400">
-                </a>
-                <div class="card-body">
-                    <div class="row justify-content-between mx-1">
-                     <div class="btn-group" role="group">
+    {% if song_list %}
 
-                          <a href="{% url 'music:detail' album.id %}"
-                             class="btn btn-outline-{{ album.border_color}} btn-sm pt-2">View Details</a>
-
-
-                          <a href="#"  class="btn btn-outline-{{ album.border_color}} btn-sm pt-2"
-                          data-toggle="tooltip" data-placement="top" title="Edit"><i class="fas fa-pen"></i></a>
-
-
-                          <form  class="btn btn-outline-{{ album.border_color }} btn-sm {{ album.border_color }} "
-                                 action="{% url 'music:delete_album' album.id %}"
-                                 method="post" style="display: inline"
-                                 data-toggle="tooltip" data-placement="top" title="Delete">
-                             {% csrf_token %}
-                             <input type="hidden" name="album_id" value="{{ album.id }}">
-                                 <button class="btn btn-link" type="submit">
-                                     <i class="fas fa-trash-alt"></i>
-                                 </button>
-
-                          </form>
-
-                     </div>
-                     <a href="{% url 'music:favorite_album' album.id %}"
-                        data-toggle="tooltip" data-placement="top" title="Favorite">
-                         <i class="fab fa-gripfire fa-gripfire-x fa-2x {% if album.is_favorite %}active{% endif %}"></i>
-                     </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    {% endfor %}
-    </div>
-
-    {% if songs %}
-
-    <div class='card card-white bg-dark text-white mw-20 mx-1 col-12'>
+    <div class='card card-white bg-dark text-white mw-20 my-5 col-12 col-md-11 mx-auto'>
                       <div class="card-body px-0 pb-0">
                           <h2 class="mb-4 d-none d-md-block pl-4">Songs</h2>
                           <h2 class="mb-4 d-block d-md-none text-center">Songs</h2>
@@ -68,7 +22,7 @@
                             <p><strong>{{ error_message }}</strong></p>
                           {% endif %}
 
-                            {% for song in songs %}
+                            {% for song in song_list %}
                             <div class="container col-12 px-0">
                             <div class="row px-0 audioPlayer">
 
@@ -118,7 +72,7 @@
                                         <span><i class="fab fa-gripfire {% if song.is_favorite %}active{% endif %}"></i></span>
                                     </a>
 
-                                    <form    action="{% url 'music:delete_song' song.album.id song.id %}"
+                                    <form    action="{% url 'music:delete_song' song.album.id song.id%}"
                                              method="post" class="btn btn-outline-{{ song.album.border_color }} bo-plr col-4 my-0">
                                          {% csrf_token %}
                                          <input type="hidden" name="album_id" value="{{ song.album.id }}">
@@ -135,9 +89,10 @@
                             {% endfor %}
                       </div>
                       </div>
-    {% elif q %}
+    {% else %}
         <h1>No results for {{ q }}</h1>
     {% endif %}
+    </div>
     </div>
     </div>
 {% endblock %}

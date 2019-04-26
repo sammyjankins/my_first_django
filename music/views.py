@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from .models import Album, Song
+from .models import Album, Song, User
 from django.views.generic.edit import UpdateView
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import AlbumForm, SongForm, UserRegForm
@@ -30,6 +30,7 @@ def index(request):
             return render(request, 'music/index.html', {
                 'albums': albums,
                 'songs': song_results,
+                'q': query,
             })
         else:
             return render(request, 'music/index.html', {'albums': albums})
@@ -159,7 +160,8 @@ def register(request):
             form.save()
             username = form.cleaned_data.get('username')
             messages.success(request, 'Welcome, {}'.format(username))
-            return redirect('music:index')
+            add_demo_albums(User.objects.get(username=username))
+            return redirect('music:login')
     else:
         form = UserRegForm()
     return render(request, 'music/register.html', {'form': form})
@@ -169,3 +171,40 @@ class AlbumUpdate(UpdateView):
     model = Album
     fields = ['artist', 'album_title', 'genre', 'album_logo', 'facebook']
 
+
+def add_demo_albums(user):
+    prim_k = (70, 78, 79)
+    for pk in prim_k:
+        album_to_copy = Album.objects.get(pk=pk)
+        album_to_copy.pk = None
+        album_to_copy.save()
+        album_to_fill = Album.objects.last()
+        album_to_fill.user = user
+        album_to_fill.save()
+        songs_to_copy = Song.objects.filter(album=Album.objects.get(pk=pk))
+        for song in songs_to_copy:
+            song.pk = None
+            song.save()
+            s2 = Song.objects.last()
+            s2.album = album_to_fill
+            s2.save()
+
+
+def songs(request, filter_by):
+    if not request.user.is_authenticated:
+        return render(request, 'music/login.html')
+    else:
+        try:
+            song_ids = []
+            for album in Album.objects.filter(user=request.user):
+                for song in album.song_set.all():
+                    song_ids.append(song.pk)
+            users_songs = Song.objects.filter(pk__in=song_ids)
+            if filter_by == 'favorites':
+                users_songs = users_songs.filter(is_favorite=True)
+        except Album.DoesNotExist:
+            users_songs = []
+        return render(request, 'music/songs.html', {
+            'song_list': users_songs,
+            'filter_by': filter_by,
+        })

@@ -25,8 +25,9 @@ SECRET_KEY = ')t#n^iyiso$#qz*vvg*qa*i9__6a+hd%s+(z7*mv!ks86rkphn'
 DEBUG = True
 
 ALLOWED_HOSTS = [
-     '10.0.2.15',
-     '4b9d7ae7.ngrok.io',
+    'localhost',
+    '10.0.2.15',
+    'selfish-impala-81.localtunnel.me',
 ]
 
 # Application definition
@@ -124,3 +125,15 @@ MEDIA_URL = '/media/'
 LOGIN_REDIRECT_URL = 'music:index'
 
 CRISPY_TEMPLATE_PACK = 'bootstrap4'
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
+EMAIL_HOST = 'smtp.gmail.com'
+
+EMAIL_PORT = 587
+
+EMAIL_USE_TLS = True
+
+EMAIL_HOST_USER = os.environ.get('EMAIL_USER')
+
+EMAIL_HOST_PASSWORD = os.environ.get('EMAIL_PASS')

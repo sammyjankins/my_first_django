@@ -9,7 +9,13 @@ $playerColor: #343a40;
 }
 .info{
   overflow: hidden;
+  a{
+    color: white;
+  }
   &:hover{
+    .text-white{
+      text-shadow: 0 0 2px white;
+    }
     .text-yellow{
       text-shadow: 0 0 2px yellow;
     }
@@ -60,12 +66,15 @@ $playerColor: #343a40;
     justify-content: flex-start;
     background-color: darken($playerColor, 7%);
     .progress{
-      margin-bottom: 0px;
-      margin-top: 0px;
-      width: 0%;
+      margin-bottom: 0;
+      margin-top: 0;
+      width: 0;
       height: 5px;
       background: #006b5a;
       transition: width .1s linear;
+    }
+    .progress-white{
+      background:  white;
     }
     .progress-yellow{
       background:  yellow;
@@ -107,10 +116,6 @@ $playerColor: #343a40;
 }
 
 .playbutton{
-  display: inline-block;
-  -moz-transition: all ease 0.5s;
-  -webkit-transition: all ease 0.5s;
-  transition: all ease 0.5s;
   &.play{
     .fa-pause{
       display: none;
@@ -126,14 +131,36 @@ $playerColor: #343a40;
   }
 }
 
-.fa-times-circle {
+.playbutton{
+  display: inline-block;
+  -moz-transition: all ease 0.5s;
+  -webkit-transition: all ease 0.5s;
+  transition: all ease 0.5s;
+  &.play-x{
+    .fa-pause{
+      display: none;
+    }
+  }
+  &.pause-x{
+    -moz-transform: rotate(180deg);
+    -webkit-transform: rotate(180deg);
+    transform: rotate(180deg);
+    .fa-play{
+      display: none;
+    }
+  }
+}
+
+
+
+.fa-times{
   font-size: 1.3rem;
   padding: 3px 3px;
 }
 .nav-button{
   transition: all ease 0.5s;
   &.nav-closed{
-    .fa-times-circle{
+    .fa-times{
       display: none;
     }
   }

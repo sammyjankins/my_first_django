@@ -19,13 +19,13 @@ def get_main_color(img_path):
     try:
         for c in colors:
             hsl = rgb_to_hls(*c[1])
-            if c[0] > max_occurence and ((130 < hsl[1] < 200) and hsl[2] > -1):
+            if c[0] > max_occurence and ((100 < hsl[1] < 200) and (-0.2 > hsl[2] > -1)):
                 (max_occurence, most_present) = c
         if most_present == 0:
-            most_present = (59, 89, 152)
+            return 'white'
         main_color = most_present
     except TypeError:
-        return '#3b5998'
+        return 'white'
     return ['#' + rgb_to_hex(*main_color), rgb_to_hls(*main_color)[0]]
 
 

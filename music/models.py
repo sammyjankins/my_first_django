@@ -30,8 +30,12 @@ class Album(models.Model):
 
     def define_colors(self):
         color_data = get_main_color(self.album_logo.path)
-        self.color = color_data[0]
-        self.border_color = get_border_color(color_data[1])
+        if color_data == 'white':
+            self.color = '#ffffff'
+            self.border_color = 'white'
+        else:
+            self.color = color_data[0]
+            self.border_color = get_border_color(color_data[1])
         self.save()
 
     def get_absolute_url(self):
@@ -39,7 +43,7 @@ class Album(models.Model):
 
 
 class Song(models.Model):
-    album = models.ForeignKey(Album, on_delete=models.CASCADE)
+    album = models.ForeignKey(Album, on_delete=models.CASCADE, null=True)
     audio_file = models.FileField(default='')
     song_title = models.CharField(max_length=250)
     is_favorite = models.BooleanField(default=False)

@@ -1,6 +1,6 @@
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 
-html, body{
+html, body {
     overflow: auto;
     min-height: 100%;
     margin: 0;
@@ -14,18 +14,26 @@ body {
     flex-flow: row wrap;
     justify-content: flex-start;
 }
-.body-content{
+
+.body-content {
     width: 100%;
     margin-bottom: 2rem;
 }
 
-.content-cust{
-  min-height: calc(100vh - 335px);
+.content-cust {
+    min-height: calc(100vh - 335px);
 }
+
 .navbar .container-fluid .navbar-brand {
     font-family: 'Pacifico', cursive;
 }
 
+.navbar-toggler {
+    border: none !important;
+    outline: none !important;
+    padding-top: 2px;
+    padding-bottom: 2px;
+}
 
 
 .navbar .container-fluid .navbar-brand:hover,
@@ -39,7 +47,7 @@ body {
 
 .fa-facebook-square,
 .fa-bandcamp,
-.fa-lastfm-square{
+.fa-lastfm-square {
     color: #B0B0B0;
 }
 
@@ -63,7 +71,8 @@ body {
 .btn-outline-green,
 .btn-outline-teal,
 .btn-outline-cyan,
-.fa-gripfire{
+.btn-outline-white,
+.fa-gripfire {
     -webkit-transition: .3s all ease;
     -moz-transition: .3s all ease;
     transition: .3s all ease;
@@ -96,7 +105,8 @@ body {
 .btn-outline-yellow,
 .btn-outline-green,
 .btn-outline-teal,
-.btn-outline-cyan {
+.btn-outline-cyan,
+.btn-outline-white{
 
     color: #f8f9fa;
 
@@ -111,7 +121,7 @@ body {
     justify-content: center;
 }
 
-.bo-plr{
+.bo-plr {
     border-top: none;
     border-bottom: none;
 }
@@ -126,6 +136,17 @@ body {
 
     border-color: #007bff;
 
+}
+
+.btn-outline-white:hover,
+.btn-outline-white:active,
+.btn-outline-white:focus {
+
+    background: white;
+
+    color: #000000;
+
+    border-color: white;
 }
 
 .btn-outline-indigo:hover,
@@ -184,7 +205,7 @@ body {
 
 .btn-outline-yellow:hover,
 .btn-outline-yellow:active,
-.btn-outline-yellow:focus{
+.btn-outline-yellow:focus {
     background: #ffc107;
     color: #000000;
     border-color: #ffc107;
@@ -216,6 +237,15 @@ body {
     border-color: #17a2b8;
 
 }
+
+.btn-link,
+.fa-pen {
+    margin: 0;
+    padding: 0;
+    color: #f8f9fa;
+    font-weight: bold;
+}
+
 
 /* Button-outline icons */
 
@@ -266,10 +296,27 @@ body {
 .btn-outline-orange:focus .fa-pen,
 .btn-outline-cyan:hover .fa-pen,
 .btn-outline-cyan:active .fa-pen,
-.btn-outline-cyan:focus .fa-pen{
+.btn-outline-cyan:focus .fa-pen,
+.btn-outline-white:hover .fa-gripfire,
+.btn-outline-white:hover .fa-trash-alt,
+.btn-outline-white:hover .btn-link,
+.btn-outline-white:active .fa-gripfire,
+.btn-outline-white:active .fa-trash-alt,
+.btn-outline-white:active .btn-link,
+.btn-outline-white:focus .fa-gripfire,
+.btn-outline-white:focus .fa-trash-alt,
+.btn-outline-white:focus .btn-link,
+.btn-outline-white:hover .fa-pen{
     color: black;
 }
 
+.btn-link:hover,
+.btn-link:active,
+.btn-link:focus{
+    color: white;
+    font-style: normal;
+    text-decoration: none;
+}
 
 
 .card-blue,
@@ -282,7 +329,8 @@ body {
 .card-yellow,
 .card-green,
 .card-teal,
-.card-cyan {
+.card-cyan,
+.card-white{
     border-color: grey;
 }
 
@@ -330,25 +378,14 @@ body {
     border-color: #17a2b8;
 }
 
-.btn-link,
-.fa-pen{
-    margin: 0;
-    padding: 0;
-    color: #f8f9fa;
-    font-weight: bold;
+.card-white:hover {
+    border-color: white;
 }
 
-.fa-trash-alt{
+.fa-trash-alt {
     color: #f8f9fa;
 }
 
-
-.btn-link:hover,
-.btn-link:active,
-.btn-link:focus {
-    font-style: normal;
-    text-decoration: none;
-}
 
 .yellow:hover button,
 .yellow:active button,
@@ -361,7 +398,10 @@ body {
 .orange:focus button,
 .cyan:focus button,
 .cyan:hover button,
-.cyan:active button {
+.cyan:active button,
+.white:focus button,
+.white:hover button,
+.white:active button{
     color: #000000;
 }
 
@@ -415,20 +455,20 @@ section {
 /*top button */
 
 #myBtn {
-  display: none;
-  position: fixed;
-  bottom: 40px;
-  right: 30px;
-  z-index: 90;
-  font-size: 25px;
-  outline: none;
-  border: 2px solid white;
-  background-color: #343a40;
-  color: white;
-  cursor: pointer;
-  padding: 0 0;
-  border-radius: 20px;
-  width: 40px;
+    display: none;
+    position: fixed;
+    bottom: 40px;
+    right: 30px;
+    z-index: 90;
+    font-size: 25px;
+    outline: none;
+    border: 2px solid white;
+    background-color: #343a40;
+    color: white;
+    cursor: pointer;
+    padding: 0 0;
+    border-radius: 20px;
+    width: 40px;
     height: 40px;
     -webkit-transition: .5s all ease;
     -moz-transition: .5s all ease;
@@ -436,7 +476,7 @@ section {
 }
 
 #myBtn:hover,
-#myBtn i:hover{
+#myBtn i:hover {
     font-size: 45px;
     margin-bottom: 10px;
     color: #ffef96;
@@ -447,7 +487,7 @@ section {
     background: none;
 }
 
-#topWord{
+#topWord {
     position: fixed;
     bottom: 50px;
     right: 30px;
@@ -463,7 +503,8 @@ section {
     opacity: 0;
     transition: .1s;
 }
-#myBtn:hover + #topWord{
+
+#myBtn:hover + #topWord {
     display: block;
     opacity: 1;
     transition: 1s;
