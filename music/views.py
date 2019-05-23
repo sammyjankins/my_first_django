@@ -109,9 +109,7 @@ def detail(request, album_id):
 def delete_album(request, album_id):
     album = Album.objects.get(pk=album_id)
     album.delete()
-    # albums = Album.objects.filter(user=request.user)
     return redirect('../../')
-    # return render(request, 'music/index.html', {'albums': albums})
 
 
 def delete_song(request, album_id, song_id):
@@ -133,7 +131,6 @@ def favorite(request, song_id):
     except (KeyError, Song.DoesNotExist):
         return JsonResponse({'success': False})
     else:
-        # return JsonResponse({'success': True})
         return render(request, 'music/detail.html', {'album': album})
 
 
@@ -165,11 +162,6 @@ def register(request):
     else:
         form = UserRegForm()
     return render(request, 'music/register.html', {'form': form})
-
-
-class AlbumUpdate(UpdateView):
-    model = Album
-    fields = ['artist', 'album_title', 'genre', 'album_logo', 'facebook']
 
 
 def add_demo_albums(user):
@@ -208,3 +200,19 @@ def songs(request, filter_by):
             'song_list': users_songs,
             'filter_by': filter_by,
         })
+
+
+def album_update_view(request, album_id):
+    if not request.user.is_authenticated:
+        return redirect('music:register')
+    else:
+        obj = get_object_or_404(Album, pk=album_id)
+        form = AlbumForm(request.POST or None, request.FILES or None, instance=obj)
+        context = {'form': form}
+        if form.is_valid():
+            obj = form.save(commit=False)
+            obj.set_websites()
+            obj.save()
+            messages.success(request, "Album info updated")
+            return render(request, 'music/detail.html', {'album': obj})
+        return render(request, 'music/album_update.html', context)

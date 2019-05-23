@@ -1,6 +1,6 @@
 {% extends 'music/base.html' %}
 {% load crispy_forms_tags %}
-{% block title %}Add a New Album{% endblock %}
+{% block title %}Update Album{% endblock %}
 {% block albums_active %}active{% endblock %}
 
 {% block content %}
@@ -13,7 +13,7 @@
                         {{ form|crispy }}
                         <div class="form-group border-top pt-4">
                             <div class="col-sm-offset-2 col-md-3">
-                                <button type="submit" class="btn btn-outline-info">Add Album</button>
+                                <button type="submit" class="btn btn-outline-info">Update</button>
                             </div>
                         </div>
                     </form>

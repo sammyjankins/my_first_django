@@ -45,10 +45,64 @@ body {
     color: white;
 }
 
-.fa-facebook-square,
+.fa-facebook,
 .fa-bandcamp,
-.fa-lastfm-square {
+.fa-spotify,
+.fa-vk,
+.fa-soundcloud,
+.fa-link,
+.fa-itunes,
+.social_link{
     color: #B0B0B0;
+}
+
+.social_link:hover,
+.social_link:active,
+.social_link:focus{
+    color:white;
+    text-decoration: none;
+}
+
+.social_link:hover .fa-facebook,
+.social_link:active .fa-facebook,
+.social_link:focus .fa-facebook{
+    color: dodgerblue;
+}
+
+.social_link:hover .fa-bandcamp,
+.social_link:active .fa-bandcamp,
+.social_link:focus .fa-bandcamp{
+    color: darkcyan;
+}
+
+.social_link:hover .fa-soundcloud,
+.social_link:active .fa-soundcloud,
+.social_link:focus .fa-soundcloud{
+    color: orangered;
+}
+
+.social_link:hover .fa-spotify,
+.social_link:active .fa-spotify,
+.social_link:focus .fa-spotify{
+    color: limegreen;
+}
+
+.social_link:hover .fa-vk,
+.social_link:active .fa-vk,
+.social_link:focus .fa-vk{
+    color: white;
+}
+
+.social_link:hover .fa-link,
+.social_link:active .fa-link,
+.social_link:focus .fa-link{
+    color: cyan;
+}
+
+.social_link:hover .fa-itunes,
+.social_link:active .fa-itunes,
+.social_link:focus .fa-itunes{
+    color: deeppink;
 }
 
 .fa-gripfire {
@@ -57,9 +111,13 @@ body {
 }
 
 .fa-pen,
+.fa-facebook,
 .fa-bandcamp,
-.fa-lastfm-square,
-.fa-facebook-square,
+.fa-spotify,
+.fa-vk,
+.fa-soundcloud,
+.fa-link,
+.fa-itunes,
 .btn-outline-blue,
 .btn-outline-indigo,
 .btn-outline-purple,
@@ -72,7 +130,8 @@ body {
 .btn-outline-teal,
 .btn-outline-cyan,
 .btn-outline-white,
-.fa-gripfire {
+.fa-gripfire,
+.social_link{
     -webkit-transition: .3s all ease;
     -moz-transition: .3s all ease;
     transition: .3s all ease;

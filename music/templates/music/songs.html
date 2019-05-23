@@ -15,8 +15,19 @@
 
     <div class='card card-white bg-dark text-white mw-20 my-5 col-12 col-md-11 mx-auto'>
                       <div class="card-body px-0 pb-0">
-                          <h2 class="mb-4 d-none d-md-block pl-4">Songs</h2>
-                          <h2 class="mb-4 d-block d-md-none text-center">Songs</h2>
+                               <div class="row">
+                                        <h2 class="mb-4 col-12 col-md-4 d-none d-md-block pl-4">Songs</h2>
+                                        <h2 class="mb-4 col-12 col-md-4 d-block d-md-none text-center">Songs</h2>
+                                        <div class="col-12 col-md-8">
+                                        <nav class="justify-content-around justify-content-md-start navbar navbar-dark navbar-expand bg-dark mx-auto">
+                                            <ul class="navbar-nav">
+                                                <li role="presentation" class="{% if filter_by == 'all' %}active{% endif %} nav-item mr-2"><a class="nav-link" href="{% url 'music:songs' 'all' %}">View All</a></li>
+                                                <li class="nav-item mt-2">/</li>
+                                                <li role="presentation" class="{% if filter_by == 'favorites' %}active{% endif %} nav-item ml-1"><a class="nav-link" href="{% url 'music:songs' 'favorites' %}">Favorites</a></li>
+                                            </ul>
+                                        </nav>
+                                        </div>
+                                </div>
 
                           {% if error_message %}
                             <p><strong>{{ error_message }}</strong></p>
