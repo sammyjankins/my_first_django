@@ -2,20 +2,22 @@
 {% block title %}Logout{% endblock %}
 
 {% block content %}
-    <div class="content-cust">
-    <div class="container-fluid">
-        <div class="col-md-12 col-lg-6">
+    <div class="col-12 col-md-8 col-lg-6 content-cust px-0 px-sm-3">
+    <div class="container-fluid px-0 px-sm-3">
             <div class="card">
+
                 <div class="card-header  text-center">
                     <h2>You have been logged out</h2>
                 </div>
+
                 <div class="border-top py-2 text-center">
                     <small class="text-muted">
-                        <a href="{% url 'music:login' %}" class="text-info">Log In Back</a>
+                       You can <a href="{% url 'music:login' %}" class="text-info">Log In Back</a> or
+                        <a href="{% url 'music:register' %}" class="text-info">Register</a>
                     </small>
                 </div>
+
             </div>
-        </div>
     </div>
     </div>
 {% endblock %}

@@ -1,24 +1,28 @@
 {% extends 'music/base.html' %}
 {% load crispy_forms_tags %}
+{% block album_create_active %}active{% endblock %}
 {% block title %}Add a New Album{% endblock %}
-{% block albums_active %}active{% endblock %}
 
 {% block content %}
-    <div class="container-fluid">
-        <div class="col-md-12 col-lg-6">
+    <div class="container-fluid px-0 px-md-3">
+        <div class="col-md-8 col-lg-6 px-0 px-md-3">
+
             <div class="card">
                 <div class="card-body">
                     <form action="" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
                         {{ form|crispy }}
+
                         <div class="form-group border-top pt-4">
                             <div class="col-sm-offset-2 col-md-3">
                                 <button type="submit" class="btn btn-outline-info">Add Album</button>
                             </div>
                         </div>
+
                     </form>
                 </div>
             </div>
+
         </div>
     </div>
 {% endblock %}

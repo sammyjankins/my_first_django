@@ -1,12 +1,12 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
-from .models import Album, Song, User
-from django.views.generic.edit import UpdateView
+from .models import Album, Song, User, add_demo_albums
 from django.shortcuts import render, get_object_or_404, redirect
 from .forms import AlbumForm, SongForm, UserRegForm
 from django.contrib import messages
 from django.db.models import Q
 from django.http import JsonResponse
+import eyed3
 
 AUDIO_FILE_TYPES = ['wav', 'mp3', 'ogg']
 IMAGE_FILE_TYPES = ['png', 'jpg', 'jpeg']
@@ -25,7 +25,8 @@ def index(request):
                 Q(artist__icontains=query)
             ).distinct()
             song_results = song_results.filter(
-                Q(song_title__icontains=query)
+                Q(song_title__icontains=query) &
+                Q(album__user=request.user)
             ).distinct()
             return render(request, 'music/index.html', {
                 'albums': albums,
@@ -33,7 +34,15 @@ def index(request):
                 'q': query,
             })
         else:
-            return render(request, 'music/index.html', {'albums': albums})
+            return render(request, 'music/index.html', {'albums': albums, 'favs': 'all'})
+
+
+def fav_albums(request):
+    if not request.user.is_authenticated:
+        return redirect('music:register')
+    else:
+        albums = Album.objects.filter(user=request.user, is_favorite=True)
+        return render(request, 'music/index.html', {'albums': albums, 'favs': 'favs'})
 
 
 def create_album(request):
@@ -66,29 +75,31 @@ def create_song(request, album_id):
     form = SongForm(request.POST or None, request.FILES or None)
     album = get_object_or_404(Album, pk=album_id)
     if form.is_valid():
-        albums_songs = album.song_set.all()
-        for s in albums_songs:
-            if s.song_title == form.cleaned_data.get("song_title"):
+        for obj in request.FILES.getlist('audio_files'):
+            albums_songs = album.song_set.all()
+            song = Song()
+            song.album = album
+            song.audio_file = obj
+            song.song_title = eyed3.load(obj.temporary_file_path()).tag.title
+            for s in albums_songs:
+                if s.song_title == song.song_title:
+                    context = {
+                        'album': album,
+                        'form': form,
+                        'error_message': 'You already added that song',
+                    }
+                    return render(request, 'music/create_song.html', context)
+            file_type = song.audio_file.url.split('.')[-1]
+            file_type = file_type.lower()
+            if file_type not in AUDIO_FILE_TYPES:
                 context = {
                     'album': album,
                     'form': form,
-                    'error_message': 'You already added that song',
+                    'error_message': 'Audio file must be WAV, MP3, or OGG',
                 }
                 return render(request, 'music/create_song.html', context)
-        song = form.save(commit=False)
-        song.album = album
-        song.audio_file = request.FILES['audio_file']
-        file_type = song.audio_file.url.split('.')[-1]
-        file_type = file_type.lower()
-        if file_type not in AUDIO_FILE_TYPES:
-            context = {
-                'album': album,
-                'form': form,
-                'error_message': 'Audio file must be WAV, MP3, or OGG',
-            }
-            return render(request, 'music/create_song.html', context)
 
-        song.save()
+            song.save()
         return render(request, 'music/detail.html', {'album': album})
     context = {
         'album': album,
@@ -162,24 +173,6 @@ def register(request):
     else:
         form = UserRegForm()
     return render(request, 'music/register.html', {'form': form})
-
-
-def add_demo_albums(user):
-    prim_k = (70, 78, 79)
-    for pk in prim_k:
-        album_to_copy = Album.objects.get(pk=pk)
-        album_to_copy.pk = None
-        album_to_copy.save()
-        album_to_fill = Album.objects.last()
-        album_to_fill.user = user
-        album_to_fill.save()
-        songs_to_copy = Song.objects.filter(album=Album.objects.get(pk=pk))
-        for song in songs_to_copy:
-            song.pk = None
-            song.save()
-            s2 = Song.objects.last()
-            s2.album = album_to_fill
-            s2.save()
 
 
 def songs(request, filter_by):

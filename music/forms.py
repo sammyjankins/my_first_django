@@ -23,10 +23,11 @@ class AlbumForm(forms.ModelForm):
                   'website_3',
                   'website_4',
                   'website_5',
+                  'description',
                   'album_logo']
 
 
-class SongForm(forms.ModelForm):
-    class Meta:
-        model = Song
-        fields = ['song_title', 'audio_file']
+class SongForm(forms.Form):
+    model = Song
+    audio_files = forms.FileField(widget=forms.ClearableFileInput(attrs={'multiple': True}))
+

@@ -1,62 +1,80 @@
 $playerColor: #343a40;
 
-.playerContainer{
+.playerContainer {
   padding-top: 7px;
 }
-.timing{
+
+.timing {
   font-size: 0.8rem;
   text-align: right;
 }
-.info{
+
+
+.info {
   overflow: hidden;
-  a{
+
+  a {
     color: white;
   }
-  &:hover{
-    .text-white{
+
+  &:hover {
+    .text-white {
       text-shadow: 0 0 2px white;
     }
-    .text-yellow{
+
+    .text-yellow {
       text-shadow: 0 0 2px yellow;
     }
-    .text-red{
+
+    .text-red {
       text-shadow: 0 0 2px red;
     }
-    .text-red1{
+
+    .text-red1 {
       text-shadow: 0 0 2px red;
     }
-    .text-blue{
+
+    .text-blue {
       text-shadow: 0 0 2px blue;
     }
-    .text-indigo{
+
+    .text-indigo {
       text-shadow: 0 0 2px #6610f2;
     }
-    .text-purple{
+
+    .text-purple {
       text-shadow: 0 0 2px #6f42c1;
     }
-    .text-pink{
+
+    .text-pink {
       text-shadow: 0 0 2px #e83e8c;
     }
-    .text-orange{
+
+    .text-orange {
       text-shadow: 0 0 2px orange;
     }
-    .text-green{
+
+    .text-green {
       text-shadow: 0 0 2px green;
     }
-    .text-cyan{
+
+    .text-cyan {
       text-shadow: 0 0 2px cyan;
     }
-    .text-teal{
+
+    .text-teal {
       text-shadow: 0 0 2px teal;
     }
   }
 }
-.seekBar{
+
+.seekBar {
   margin-top: 5px;
   display: flex;
   justify-content: flex-start;
   align-content: center;
-  .outer{
+
+  .outer {
     overflow: hidden;
     border: 1px solid $playerColor;
     border-radius: 2px;
@@ -65,7 +83,8 @@ $playerColor: #343a40;
     flex-basis: 100%;
     justify-content: flex-start;
     background-color: darken($playerColor, 7%);
-    .progress{
+
+    .progress {
       margin-bottom: 0;
       margin-top: 0;
       width: 0;
@@ -73,102 +92,319 @@ $playerColor: #343a40;
       background: #006b5a;
       transition: width .1s linear;
     }
-    .progress-white{
-      background:  white;
+
+    .progress-white {
+      background: white;
     }
-    .progress-yellow{
-      background:  yellow;
+
+    .progress-yellow {
+      background: yellow;
     }
-    .progress-red{
-      background:  red;
+
+    .progress-red {
+      background: red;
     }
-    .progress-red1{
-      background:  red;
+
+    .progress-red1 {
+      background: red;
     }
-    .progress-blue{
-      background:  blue;
+
+    .progress-blue {
+      background: blue;
     }
-    .progress-indigo{
-      background:  #6610f2;
+
+    .progress-indigo {
+      background: #6610f2;
     }
-    .progress-purple{
-      background:  #6f42c1;
+
+    .progress-purple {
+      background: #6f42c1;
     }
-    .progress-pink{
-      background:  #e83e8c;
+
+    .progress-pink {
+      background: #e83e8c;
     }
-    .progress-orange{
-      background:  orange;
+
+    .progress-orange {
+      background: orange;
     }
-    .progress-green{
-      background:  green;
+
+    .progress-green {
+      background: green;
     }
-    .progress-cyan{
-      background:  cyan;
+
+    .progress-cyan {
+      background: cyan;
     }
-    .progress-teal{
-      background:  teal;
+
+    .progress-teal {
+      background: teal;
     }
-    &:hover{
+
+    &:hover {
       cursor: pointer;
     }
   }
 }
 
-.playbutton{
-  &.play{
-    .fa-pause{
+.playbutton {
+  &.play {
+    .fa-pause {
       display: none;
     }
   }
-  &.pause{
+
+  &.pause {
     -moz-transform: rotate(180deg);
     -webkit-transform: rotate(180deg);
     transform: rotate(180deg);
-    .fa-play{
+
+    .fa-play {
       display: none;
     }
   }
 }
 
-.playbutton{
+.playbutton {
   display: inline-block;
   -moz-transition: all ease 0.5s;
   -webkit-transition: all ease 0.5s;
   transition: all ease 0.5s;
-  &.play-x{
-    .fa-pause{
+
+  &.play-x {
+    .fa-pause {
       display: none;
     }
   }
-  &.pause-x{
+
+  &.pause-x {
     -moz-transform: rotate(180deg);
     -webkit-transform: rotate(180deg);
     transform: rotate(180deg);
-    .fa-play{
+
+    .fa-play {
       display: none;
     }
   }
 }
 
 
-
-.fa-times{
+.fa-times {
   font-size: 1.3rem;
   padding: 3px 3px;
 }
-.nav-button{
+
+.nav-button {
   transition: all ease 0.5s;
-  &.nav-closed{
-    .fa-times{
-      display: none;
-    }
-  }
-  &.nav-opened{
-    transform: rotate(180deg);
-    .navbar-toggler-icon{
+
+  &.nav-closed {
+    .fa-times {
       display: none;
     }
   }
 
+  &.nav-opened {
+    transform: rotate(180deg);
+
+    .navbar-toggler-icon {
+      display: none;
+    }
+  }
+
+}
+
+
+.newBoston {
+  color: black;
+  font-weight: bold;
+  text-shadow: 0 0 1px yellow;
+
+  &:hover,
+  &:active,
+  &:focus {
+    text-decoration: none;
+    color: darkblue;
+    text-shadow: 0 0 3px red;
+  }
+}
+
+.crSch {
+  color: black;
+  font-weight: bold;
+  text-shadow: 0 0 1px yellow;
+
+  &:hover,
+  &:active,
+  &:focus {
+    text-decoration: none;
+    color: darkblue;
+    text-shadow: 0 0 3px red;
+  }
+}
+
+
+.socials_desc {
+  padding: 1em;
+}
+
+#vk_link:hover ~ .socials_desc:before,
+#fb_link:hover ~ .socials_desc:before,
+#gh_link:hover ~ .socials_desc:before,
+#tg_link:hover ~ .socials_desc:before,
+#ml_link:hover ~ .socials_desc:before,
+#bc_link:hover ~ .socials_desc:before {
+  display: inline-block;
+  text-shadow: 0 0 3px lightskyblue;
+  -webkit-animation: color-change 30s infinite;
+  -moz-animation: color-change 30s infinite;
+  -o-animation: color-change 30s infinite;
+  -ms-animation: color-change 30s infinite;
+  animation: color-change 30s infinite;
+}
+
+
+#vk_link:hover ~ .socials_desc:before {
+  content: 'You can message me on VK';
+}
+
+#fb_link:hover ~ .socials_desc:before {
+  content: 'You can message me on Facebook';
+}
+
+#gh_link:hover ~ .socials_desc:before {
+  content: 'Check out code on GitHub';
+}
+
+#tg_link:hover ~ .socials_desc:before {
+  content: 'You can message me on Telegram';
+}
+
+#ml_link:hover ~ .socials_desc:before {
+  content: 'Email me';
+}
+
+#bc_link:hover ~ .socials_desc:before {
+  content: 'You also can check out my music project on Bandcamp';
+}
+
+
+.socials_desc:before {
+  font-size: 20px;
+  content: '..................................';
+  color: #343a40;
+}
+
+@-webkit-keyframes color-change {
+  0% {
+    color: cornflowerblue;
+    opacity: 0.6;
+  }
+  30% {
+    color: cornflowerblue;
+    opacity: 0.8;
+  }
+  60% {
+    color: white;
+    opacity: 1;
+  }
+  90% {
+    color: cornflowerblue;
+    opacity: 0.8;
+  }
+  100% {
+    color: deepskyblue;
+    opacity: 0.6;
+  }
+}
+
+@-moz-keyframes color-change {
+  0% {
+    color: cornflowerblue;
+    opacity: 0.6;
+  }
+  30% {
+    color: cornflowerblue;
+    opacity: 0.8;
+  }
+  60% {
+    color: white;
+    opacity: 1;
+  }
+  90% {
+    color: cornflowerblue;
+    opacity: 0.8;
+  }
+  100% {
+    color: deepskyblue;
+    opacity: 0.6;
+  }
+}
+
+@-ms-keyframes color-change {
+  0% {
+    color: cornflowerblue;
+    opacity: 0.6;
+  }
+  30% {
+    color: cornflowerblue;
+    opacity: 0.8;
+  }
+  60% {
+    color: white;
+    opacity: 1;
+  }
+  90% {
+    color: cornflowerblue;
+    opacity: 0.8;
+  }
+  100% {
+    color: deepskyblue;
+    opacity: 0.6;
+  }
+}
+
+@-o-keyframes color-change {
+  0% {
+    color: cornflowerblue;
+    opacity: 0.6;
+  }
+  30% {
+    color: cornflowerblue;
+    opacity: 0.8;
+  }
+  60% {
+    color: white;
+    opacity: 1;
+  }
+  90% {
+    color: cornflowerblue;
+    opacity: 0.8;
+  }
+  100% {
+    color: deepskyblue;
+    opacity: 0.6;
+  }
+}
+
+@keyframes color-change {
+  0% {
+    color: cornflowerblue;
+    opacity: 0.6;
+  }
+  30% {
+    color: cornflowerblue;
+    opacity: 0.8;
+  }
+  60% {
+    color: white;
+    opacity: 1;
+  }
+  90% {
+    color: cornflowerblue;
+    opacity: 0.8;
+  }
+  100% {
+    color: deepskyblue;
+    opacity: 0.6;
+  }
 }

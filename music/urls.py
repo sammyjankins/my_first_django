@@ -1,6 +1,6 @@
 from django.conf.urls import url
 from django.contrib.auth import views as av
-from django.urls import reverse_lazy, path, include
+from django.urls import reverse_lazy
 
 from . import views
 
@@ -8,6 +8,7 @@ app_name = 'music'
 
 urlpatterns = [
     url(r'^$', views.index, name='index'),
+    url(r'^favorite_albums/$', views.fav_albums, name='favorite_albums'),
     url(r'^register/$', views.register, name='register'),
     url(r'^login/$', av.LoginView.as_view(template_name='music/login.html'), name='login'),
     url(r'^logout/$', av.LogoutView.as_view(template_name='music/logout.html'), name='logout'),

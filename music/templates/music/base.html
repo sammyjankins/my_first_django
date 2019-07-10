@@ -1,10 +1,16 @@
 <!DOCTYPE html>
 <html lang="en">
+
+
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+    <meta name="viewport"
+          content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
+
     <title>{% block title %}SJ music{% endblock %}</title>
+
     {% load staticfiles %}
+
     <link rel="stylesheet"
           href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css"
           integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO"
@@ -17,23 +23,36 @@
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
           integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
           crossorigin="anonymous">
+
     <script src="{% static 'music/script.js' %}" type="text/javascript" language="JavaScript"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js"></script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js"
             integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy"
             crossorigin="anonymous"></script>
 </head>
+
+
 <body>
+
+
 <div class="body-content">
-    <div class="section d-none d-sm-none d-md-block">
+
+    <!-- ******* TOP BUTTON ******* -->
+
+    <div class="section d-none d-md-block">
         <button onclick="topFunction()" id="myBtn"><i class="fas fa-arrow-up"></i></button>
         <span id="topWord">TOP</span>
     </div>
+
+    <!-- ******* NAVBAR ******* -->
+
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5" id="navcustom">
         <div class="container-fluid">
 
-            <!-- Logo -->
+            <!-- ******* BRAND ICON ******* -->
             <a class="navbar-brand" href="{% url 'music:index' %}">SJ</a>
+
             {% if messages %}
                 {% for message in messages %}
                     <span class="navbar-brand"> {{ message }}</span>
@@ -41,6 +60,9 @@
             {% endif %}
 
             {% if user.is_authenticated %}
+
+                <!-- ******* COLLAPSE TOGGLE ******* -->
+
                 <button class="navbar-toggler collapsed"
                         type="button"
                         data-toggle="collapse"
@@ -54,80 +76,223 @@
                         <span class="navbar-toggler-icon"></span>
                         <i class="fas fa-times fa-lg fa-spin"></i>
                     </div>
-
                 </button>
+
+                <!-- ******* COLLAPSIBLE ******* -->
 
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
 
-                    <ul class="navbar-nav mr-auto">
+                <ul class="navbar-nav mr-auto">
 
-                        <li class="{% block albums_active %}{% endblock %}"><a class="nav-link mr-3"
-                                                                               href="{% url 'music:index' %}">
+                    <!-- ******* ALBUMS DROPDOWN ******* -->
+
+                    <li class="{% block albums_active %}{% endblock %} dropdown">
+                        <a class="nav-link mr-3 dropdown-toggle" href="#"
+                           role="button" id="dropdownFav" data-toggle="dropdown"
+                           aria-haspopup="true" aria-expanded="false">
                             <i class="fas fa-compact-disc"></i>&nbsp;Albums</a>
-                        </li>
 
-                        <li class="{% block songs_active %}{% endblock %}"><a class="nav-link" href="{% url 'music:songs' 'all'%}">
-                            <i class="fas fa-music"></i>&nbsp; Songs</a>
-                        </li>
+                        <div class="dropdown-menu px-3" aria-labelledby="dropdownFav">
 
-                    </ul>
+                            <ul class="navbar-nav">
+                                <li role="presentation" class="{% if favs == 'all' %}active{% endif %} nav-item mr-2"><a
+                                        class="nav-link" href="{% url 'music:index' %}">All</a></li>
+                                <li class="nav-item mt-2 text-white">/</li>
+                                <li role="presentation" class="{% if favs == 'favs' %}active{% endif %} nav-item ml-1">
+                                    <a class="nav-link" href="{% url 'music:favorite_albums' %}">Favorites</a></li>
+                            </ul>
 
-                    <ul class="navbar-nav mr-3">
+                        </div>
+                    </li>
+
+                    <!-- ******* SONGS ******* -->
+
+                    <li class="{% block songs_active %}{% endblock %}"><a class="nav-link"
+                                                                          href="{% url 'music:songs' 'all' %}">
+                        <i class="fas fa-music"></i>&nbsp; Songs</a>
+                    </li>
+
+                </ul>
+
+                <!-- ******* LINK TO ALBUM FORM ******* -->
+
+                <ul class="navbar-nav mr-3">
+                    <li class="nav-item {% block album_create_active %}{% endblock %}">
+                        <a class="nav-link pl-0 mr-3" href="{% url 'music:create_album' %}">
+                            <i class="far fa-plus-square"></i>&nbsp;
+                            Add Album
+                        </a>
+                    </li>
+                </ul>
+
+                <!-- SEARCH -->
+
+                <form class="form-inline my-2 my-lg-0 mr-auto" role="search" method="get"
+                      action="{% url 'music:index' %}">
+                    <input class="form-control mr-sm-3" type="text" placeholder="Search" name="q"
+                           value="{{ request.GET.q }}">
+                    <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
+                </form>
+
+            {% endif %}
+            <div class="row {% if user.is_authenticated %} col-12 col-lg-3 col-xl-2 {% else %} col-6 col-md-4 col-lg-3 col-xl-2 {% endif %} px-0">
+                <div class="{% if user.is_authenticated %} col-12 col-lg-6 pl-lg-0 {% else %} col-6 px-0 {% endif %}">
+
+                    <!-- ******* POPOVER TOGGLE  ******* -->
+
+                    <ul class="navbar-nav mx-0">
                         <li class="nav-item">
-                            <a class="nav-link pl-0 mr-3" href="{% url 'music:create_album' %}">
-                                <i class="far fa-plus-square"></i>&nbsp;
-                                Add Album
+                            <a href="#" tabindex="0"
+                               class="nav-link px-0 d-flex d-md-none mr-0 myPopover"
+                               role="button"
+                               data-toggle="popover"
+                               data-trigger="focus"
+                               data-html="true"
+                               data-placement="bottom"
+                               title="About this site"
+                               data-popover-content="#myPopoverContent">
+                                <span class="col-12 px-0"><i class="fas fa-info-circle"></i>&nbsp;
+                                About</span>
                             </a>
-                        </li>
-                    </ul>
-                    <form class="form-inline my-2 my-lg-0 mr-auto" role="search" method="get" action="{% url 'music:index' %}">
-                        <input class="form-control mr-sm-3" type="text" placeholder="Search" name="q" value="{{ request.GET.q }}">
-                        <button class="btn btn-outline-light my-2 my-sm-0" type="submit">Search</button>
-                    </form>
+                            <a href="#" tabindex="0"
+                               class="nav-link px-0 d-none d-md-flex mr-0 myPopover"
+                               role="button"
+                               data-toggle="popover"
+                               data-trigger="click"
+                               data-html="true"
+                               data-placement="bottom"
+                               title="About this site"
+                               data-popover-content="#myPopoverContent">
+                                <span class="col-12 px-0"><i class="fas fa-info-circle"></i>&nbsp;
+                                About</span>
+                            </a>
+                            <script>
+                                $('.myPopover').popover({
+                                    html: true,
+                                    content: function () {
+                                        var elementId = $(this).attr("data-popover-content");
+                                        return $(elementId).html();
+                                    }
+                                });
+                            </script>
 
-                    <ul class="navbar-nav mr-3">
-                        <li class="nav-item">
-                            <a class="nav-link pl-0 mr-auto" href="{% url 'music:logout' %}">
-                                <i class="fas fa-sign-out-alt"></i>&nbsp;
-                                Logout
-                            </a>
                         </li>
                     </ul>
                 </div>
 
-            {% else %}
+                <!-- ******* HTML POPOVER ******* -->
 
-                <form class="form-inline">
-                    <ul class="navbar-nav">
-                        <li class="nav-item">
-                            <a class="nav-link" href="{% url 'music:login' %}">
-                                <i class="fas fa-sign-in-alt"></i>&nbsp;
-                                Log In
-                            </a>
+                <div id="myPopoverContent" style="display:none;">
+                    <strong>What is this?</strong>
+                    <p class="pt-2 pb-0">
+                        It's an app based on <a href="https://github.com/buckyroberts/Viberr"
+                                                class="viberr">Viberr</a> of Bucky Roberts. This app allows you to
+                        upload and store your music on the cloud.
+                    </p>
+                    Some words about functionality:
+                    <ul class="p-2 pt-0">
+                        <li>You must register and log in to use this app</li>
+                        <li>You can create a music album profile and upload a bunch of tracks into it (wav, mp3, ogg)
                         </li>
+                        <li>You can mark some of your albums and tracks as favorite and check marked content in
+                            "favorite" menu item on "Songs" or "Albums" menu
+                        </li>
+                        <li>You can use the search to find content you are searching for</li>
+                        <li>Some parts of interface change color depending on primary color of album logo</li>
                     </ul>
-                </form>
-            {% endif %}
+                    <div class="border-top">
+                        <p style="padding-top: 10px; font-size: 0.9em">
+                            Sources of inspiration - Django tutorials on
+                            <a class="newBoston"
+                               href="https://www.youtube.com/watch?v=qgGIqRFvFFk&list=PL6gx4Cwl9DGBlmzzFcLgDhKTTfNLfX1IK">thenewboston
+                            </a> and
+                            <a class="crSch"
+                               href="https://www.youtube.com/watch?v=UmljXZIypDc&list=PL-osiE80TeTtoQCKZ03TU5fNfx2UY6U4p">Corey
+                                Schafer
+                            </a> YouTube channels
+                        </p>
+                    </div>
+                </div>
+
+
+                <!-- ******* LOGOUT BUTTON ******* -->
+
+                {% if user.is_authenticated %}
+                    <div class="col-12 col-lg-5 px-0">
+                        <ul class="navbar-nav mx-0">
+                            <li class="nav-item">
+                                <a class="nav-link px-0 mr-auto" href="{% url 'music:logout' %}">
+                                <span class="col-12 px-lg-0">
+                                    <i class="fas fa-sign-out-alt"></i>&nbsp;
+                                    Logout
+                                </span>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+
+
+                {% else %}
+
+                    <!-- ******* LOG IN BUTTON ******* -->
+                    <div class="col-6 px-0">
+                        <form class="form-inline">
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <a class="nav-link" href="{% url 'music:login' %}">
+                                        <i class="fas fa-sign-in-alt"></i>&nbsp;
+                                        Log In
+                                    </a>
+                                </li>
+                            </ul>
+                        </form>
+                    </div>
+                {% endif %}
+            </div>
+            </div>
         </div>
     </nav>
     {% block content %}
     {% endblock %}
 </div>
+
+<!-- ******* NAVBAR END ******* -->
+
+
+<!-- ******* FOOTER ******* -->
+
 <section id="footer">
     <div class="container">
-        <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 mt-5 mt-sm-5">
+        <div>
+            <div class="col-12 mt-5">
+
+                <!-- ******* LINKS ******* -->
+
                 <ul class="list-unstyled list-inline social text-center">
-                    <li class="list-inline-item mx-2"><a href="#"><i class="fab fa-vk"></i></a></li>
-                    <li class="list-inline-item mx-2"><a href="#"><i class="fab fa-facebook-f"></i></a></li>
-                    <li class="list-inline-item mx-2"><a href="#"><i class="fab fa-github-alt"></i></a></li>
-                    <li class="list-inline-item mx-2"><a href="#"><i class="fab fa-telegram-plane"></i></a></li>
-                    <li class="list-inline-item mx-2"><a href="#"><i class="far fa-envelope"></i></a></li>
+                    <li class="list-inline-item mx-2" id="vk_link">
+                        <a href="https://vk.com/sammyjankins"><i class="fab fa-vk"></i></a></li>
+                    <li class="list-inline-item mx-2" id="tg_link">
+                        <a href="https://t.me/Xenosapien"><i class="fab fa-telegram-plane"></i></a></li>
+                    <li class="list-inline-item mx-2" id="fb_link">
+                        <a href="https://www.facebook.com/Xenosapien213"><i class="fab fa-facebook-f"></i></a></li>
+                    <li class="list-inline-item mx-2" id="gh_link"><a
+                            href="https://github.com/sammyjankins"><i
+                            class="fab fa-github-alt"></i></a></li>
+                    <li class="list-inline-item mx-2" id="ml_link"><a href="mailto:neroragno@mail.ru"><i
+                            class="far fa-envelope"></i></a></li>
+                    <li class="list-inline-item mx-2" id="bc_link"><a
+                            href="https://lordofserpentsandreeds.bandcamp.com/"><i class="fab fa-bandcamp bc_icon"></i></a>
+                    </li>
+                    <li class="col-12 text-center socials_desc">
+                    </li>
                 </ul>
             </div>
         </div>
+
+        <!-- ******* SOME USELESS INFO ******* -->
+
         <div class="row">
-            <div class="col-xs-12 col-sm-12 col-md-12 mt-2 mt-sm-2 text-center text-white">
+            <div class="col-12 mt-0 text-center text-white">
                 <p><u><a href="https://www.youtube.com/watch?v=dQw4w9WgXcQ">Sounds Of Imbalance</a></u>&nbsp; sleeps
                     through The NE/VER the Artificial, Lightsource Is. Creeping [with flies and this time I.B. Reak, I
                     Will, NE]</p>
@@ -135,7 +300,7 @@
                                                        href="https://vlterno.github.io/thingstatus.com/"
                                                        target="_blank">DefiantToWhat'sDelivered</a></p>
                 <button onclick="topFunction()"
-                        class="btn btn-secondary btn-lg btn-block d-block d-sm-block d-md-none"
+                        class="btn btn-secondary btn-lg btn-block d-block d-md-none"
                         id="smBtn">^
                 </button>
             </div>

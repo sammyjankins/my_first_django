@@ -1,143 +1,141 @@
 {% extends 'music/base.html' %}
+{% block title %}{% if q %}Search Results{% else %}{{user}}'s Albums{% endif %}{% endblock %}
+{% block albums_active %}active{% endblock %}
 {% block content %}
-<div class="content-cust">
-    <div class="albums-container container-fluid">
+    <div class="content-cust">
 
-    <div class="row justify-content-between">
+        <div class="albums-container container-fluid px-0 px-md-3">
 
-    <div class="col-xs-12 col-sm-12">
-        <h3>{{ user.username }}'s Albums</h3>
-    </div>
+            {% if albums or songs %}
 
-    {% for album in albums %}
-        <div class="col-12 col-sm-5 col-md-6 col-lg-4 my-3">
-            <div class='card card-{{ album.border_color }} alb-card bg-dark text-white mx-auto' style="min-width: 20em; max-width: 30em">
-                <div class="card-header  text-center">
-                    <h3>{{ album.album_title }}</h3>
-                    <h5>{{ album.artist }}</h5>
-                </div>
-                <a href="{% url 'music:detail' album.id %}">
-                    <img src="{{ album.album_logo.url }}" alt="{{ album.album_logo.url }}"
-                         class="card-img-top"
-                         width="400">
-                </a>
-                <div class="card-body">
-                    <div class="row justify-content-between mx-1">
-                     <div class="btn-group" role="group">
+                {% if albums %}
 
-                          <a href="{% url 'music:detail' album.id %}"
-                             class="btn btn-outline-{{ album.border_color}} btn-sm pt-2">View Details</a>
+                    <div class="row justify-content-between">
 
+                        {% for album in albums %}
 
-                          <a href="#"  class="btn btn-outline-{{ album.border_color}} btn-sm pt-2"
-                          data-toggle="tooltip" data-placement="top" title="Edit"><i class="fas fa-pen"></i></a>
+                            <!-- ******* ALBUM CARD START ******* -->
 
+                            <div class="col-12 col-md-6 col-lg-4 my-3">
+                                <div class='card card-{{ album.color }} alb-card bg-dark text-white mx-auto'
+                                     style="min-width: 20em; max-width: 30em">
 
-                          <form  class="btn btn-outline-{{ album.border_color }} btn-sm {{ album.border_color }} "
-                                 action="{% url 'music:delete_album' album.id %}"
-                                 method="post" style="display: inline"
-                                 data-toggle="tooltip" data-placement="top" title="Delete">
-                             {% csrf_token %}
-                             <input type="hidden" name="album_id" value="{{ album.id }}">
-                                 <button class="btn btn-link" type="submit">
-                                     <i class="fas fa-trash-alt"></i>
-                                 </button>
+                                    <!-- ******* TITLE AND LOGO ******* -->
 
-                          </form>
-
-                     </div>
-                     <a href="{% url 'music:favorite_album' album.id %}"
-                        data-toggle="tooltip" data-placement="top" title="Favorite">
-                         <i class="fab fa-gripfire fa-gripfire-x fa-2x {% if album.is_favorite %}active{% endif %}"></i>
-                     </a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    {% endfor %}
-    </div>
-
-    {% if songs %}
-
-    <div class='card card-white bg-dark text-white mw-20 mx-1 col-12'>
-                      <div class="card-body px-0 pb-0">
-                          <h2 class="mb-4 d-none d-md-block pl-4">Songs</h2>
-                          <h2 class="mb-4 d-block d-md-none text-center">Songs</h2>
-
-                          {% if error_message %}
-                            <p><strong>{{ error_message }}</strong></p>
-                          {% endif %}
-
-                            {% for song in songs %}
-                            <div class="container col-12 px-0">
-                            <div class="row px-0 audioPlayer">
-
-
-                                <div class="my-0 py-0 col-12 col-md-9 col-lg-10 px-1 border-top">
-
-                                    <div class="container">
-                                         <div class="playerContainer">
-                                            <div class="info">
-                                                <div class="row justify-content-between text-{{ song.album.border_color }}">
-                                                    <div class="row col-9 mx-1">
-                                                        <a href="{% url 'music:detail' song.album.id %}" class="col-12 col-md-7 text-center text-md-left">{{ song.album }} </a>
-                                                        <span class="audioName col-12 col-md-5 text-center text-md-right">{{ song.song_title }}</span>
-                                                    </div>
-                                                    <div class="timing col-2">
-                                                        <span id="start-{{ song.id }}">0:00</span>
-                                                    </div>
-                                                </div>
-                                                <div class="seekBar">
-                                                    <span class="outer outer-{{ song.id }}">
-                                                        <span class="progress progress-{{ song.album.border_color }} inner" id="progress-{{ song.id }}"></span>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
+                                    <div class="card-header  text-center">
+                                        <h3>{{ album.album_title }}</h3>
+                                        <h5>{{ album.artist }}</h5>
                                     </div>
 
-                                </div>
-                                <div class="my-0 py-0 border-top row justify-content-between col-12 col-md-3 col-lg-2 text-center px-0 mx-0">
-
-                                    <audio class="audio d-none" id="audio-{{ song.id }}">
-                                        <source src="{{ song.audio_file.url }}">
-                                    </audio>
-                                    <button
-                                       class="btn btn-outline-{{ song.album.border_color }} bo-plr col-4 my-0"
-                                       onclick="playSong('{{ song.id }}');"
-                                       id="pbtn-{{ song.id }}">
-                                            <div id="{{ song.id }}">
-                                                <div class="playbutton play">
-                                                    <i class="fas fa-play"></i>
-                                                    <i class="fas fa-pause"></i>
-                                                </div>
-                                            </div>
-                                    </button>
-                                    <a href="{% url 'music:favorite' song.id %}"
-                                       class="btn btn-outline-{{ song.album.border_color }} bo-plr col-4 my-0">
-                                        <span><i class="fab fa-gripfire {% if song.is_favorite %}active{% endif %}"></i></span>
+                                    <a href="{% url 'music:detail' album.id %}">
+                                        <img src="{{ album.album_logo.url }}" alt="{{ album.album_logo.url }}"
+                                             class="card-img-top"
+                                             width="400">
                                     </a>
 
-                                    <form    action="{% url 'music:delete_song' song.album.id song.id %}"
-                                             method="post" class="btn btn-outline-{{ song.album.border_color }} bo-plr col-4 my-0">
-                                         {% csrf_token %}
-                                         <input type="hidden" name="album_id" value="{{ song.album.id }}">
-                                             <button class="btn btn-link" type="submit">
-                                                     <span><i class="fas fa-trash-alt"></i></span>
-                                             </button>
-                                    </form>
+                                    <!-- ******* BUTTONS ******* -->
 
-                                </div>
-                                </div>
-                                </div>
+                                    <div class="card-body">
+                                        <div class="row justify-content-between mx-1">
+                                            <div class="btn-group" role="group">
 
+                                                <a href="{% url 'music:detail' album.id %}"
+                                                   class="btn btn-outline-{{ album.color }} btn-sm pt-1">View
+                                                    Details</a>
+
+
+                                                <a href="{% url 'music:album-update' album.id %}"
+                                                   class="btn btn-outline-{{ album.color }} btn-sm pt-1"
+                                                   data-toggle="tooltip" data-placement="top" title="Edit"><i
+                                                        class="fas fa-pen"></i></a>
+
+
+                                                <form class="btn btn-outline-{{ album.color }} btn-sm {{ album.color }} "
+                                                      action="{% url 'music:delete_album' album.id %}"
+                                                      method="post" style="display: inline"
+                                                      data-toggle="tooltip" data-placement="top" title="Delete">
+                                                    {% csrf_token %}
+                                                    <input type="hidden" name="album_id" value="{{ album.id }}">
+                                                    <button class="btn btn-link" type="submit">
+                                                        <i class="fas fa-trash-alt"></i>
+                                                    </button>
+                                                </form>
+
+                                            </div>
+
+                                            <a href="{% url 'music:favorite_album' album.id %}"
+                                               data-toggle="tooltip" data-placement="top" title="Favorite">
+                                                <i class="fab fa-gripfire fa-gripfire-x fa-2x {% if album.is_favorite %}active{% endif %}"></i>
+                                            </a>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                        {% endfor %}
+                    </div>
+
+                {% endif %}
+
+                <!-- ******* WHEN SEARCHING AND THERES SONGS ******* -->
+
+                {% if songs %}
+
+                    <div class='card card-white bg-dark text-white mw-20 my-5 col-12'>
+                        <div class="card-body px-0 pb-0">
+
+                            <h2 class="mb-2 text-center text-md-left pl-md-4">Songs</h2>
+
+                            {% if error_message %}
+                                <p><strong>{{ error_message }}</strong></p>
+                            {% endif %}
+
+                            {% for song in songs %}
+
+                                <!-- ******* PLAYER FROM TEMPLATE******* -->
+
+                                {% include 'music/player_template.html' %}
 
                             {% endfor %}
-                      </div>
-                      </div>
-    {% elif q %}
-        <h1>No results for {{ q }}</h1>
-    {% endif %}
-    </div>
+                        </div>
+                    </div>
+                {% endif %}
+
+
+            {% elif q %}
+
+                <h1>No results for {{ q }}</h1>
+
+            {% else %}
+
+                <!-- ******* IF NO CONTENT ******* -->
+
+                <div class="col-12 col-md-6">
+
+                    <div class="card p-3">
+
+                        <div class="text-center mb-3 ">
+                            <h2>You have no {% if favs == 'favs' %}favorite {% endif %}albums in library</h2>
+                        </div>
+
+                        {% if favs == 'all' %}
+                            <div class="text-center">
+                                <a class="btn btn-outline-info" role="button" href="{% url 'music:create_album' %}">Add
+                                    Album</a>
+                            </div>
+
+                        {% else %}
+                            <div class="text-center">
+                                <a class="btn btn-outline-info" role="button" href="{% url 'music:index' %}">Back to
+                                    your albums</a>
+                            </div>
+                        {% endif %}
+                    </div>
+
+                </div>
+
+            {% endif %}
+        </div>
     </div>
 {% endblock %}

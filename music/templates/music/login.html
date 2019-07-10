@@ -3,13 +3,14 @@
 {% block title %}Log In{% endblock %}
 
 {% block content %}
-    <div class="content-cust">
-    <div class="container-fluid">
-        <div class="col-md-12 col-lg-6">
+    <div class="content-cust col-12 col-md-8 col-lg-6 px-0 px-sm-3 mb-5">
+        <div class="container-fluid px-0 px-sm-3">
             <div class="card">
+
                 <div class="card-header  text-center">
                     <h2>Log in</h2>
                 </div>
+
                 <div class="card-body">
                     <form action="" method="post" enctype="multipart/form-data">
                         {% csrf_token %}
@@ -21,18 +22,22 @@
                         </div>
                     </form>
                 </div>
+
+                <!-- ******* CARD FOOTER ******* -->
+
                 <div class="border-top py-2">
                     <small class="text-muted ml-3">
                         Don't have an account? <a href="{% url 'music:register' %}" class="ml-2 text-info">Register</a>
                     </small>
                 </div>
+
                 <div class="pt-0 pb-2">
                     <small class="text-muted ml-3">
                         Don't remember your password? <a href="{% url 'music:password_reset' %}" class="ml-2 text-info">Reset</a>
                     </small>
                 </div>
+
             </div>
         </div>
-    </div>
     </div>
 {% endblock %}

@@ -1,109 +1,69 @@
 {% extends 'music/base.html' %}
-{% block title %}All Songs{% endblock %}
+{% block title %}{{ user }}'s Songs{% endblock %}
 {% block songs_active %}active{% endblock %}
 {% block content %}
-<div class="content-cust">
-    <div class="albums-container container-fluid">
+    <div class="content-cust">
+        <div class="albums-container container-fluid">
 
-    <div class="row justify-content-between">
+            <div class="row justify-content-between">
 
-    <div class="col-xs-12 col-sm-12">
-        <h3>{{ user.username }}'s songs</h3>
-    </div>
+                {% if song_list %}
 
-    {% if song_list %}
+                    <!-- ******* SONGS CARD ******* -->
 
-    <div class='card card-white bg-dark text-white mw-20 my-5 col-12 col-md-11 mx-auto'>
-                      <div class="card-body px-0 pb-0">
-                               <div class="row">
-                                        <h2 class="mb-4 col-12 col-md-4 d-none d-md-block pl-4">Songs</h2>
-                                        <h2 class="mb-4 col-12 col-md-4 d-block d-md-none text-center">Songs</h2>
-                                        <div class="col-12 col-md-8">
-                                        <nav class="justify-content-around justify-content-md-start navbar navbar-dark navbar-expand bg-dark mx-auto">
-                                            <ul class="navbar-nav">
-                                                <li role="presentation" class="{% if filter_by == 'all' %}active{% endif %} nav-item mr-2"><a class="nav-link" href="{% url 'music:songs' 'all' %}">View All</a></li>
-                                                <li class="nav-item mt-2">/</li>
-                                                <li role="presentation" class="{% if filter_by == 'favorites' %}active{% endif %} nav-item ml-1"><a class="nav-link" href="{% url 'music:songs' 'favorites' %}">Favorites</a></li>
-                                            </ul>
-                                        </nav>
-                                        </div>
+                    <div class='card card-white bg-dark text-white mw-20 my-5 col-12 col-md-11 mx-auto'>
+                        <div class="card-body px-0 pb-0">
+                            <div class="row">
+
+                                <h2 class="mb-2 col-12 col-md-4 pl-md-5 text-center text-md-left">Songs</h2>
+
+                                <div class="col-12 col-md-8">
+
+                                    <!-- ******* ALL/FAVS NAV ******* -->
+
+                                    <nav class="justify-content-around justify-content-md-start navbar navbar-dark navbar-expand bg-dark mx-auto">
+                                        <ul class="navbar-nav">
+
+                                            <li role="presentation"
+                                                class="{% if filter_by == 'all' %}active{% endif %} nav-item mr-2"><a
+                                                    class="nav-link" href="{% url 'music:songs' 'all' %}">View All</a>
+                                            </li>
+
+                                            <li class="nav-item mt-2">/</li>
+
+                                            <li role="presentation"
+                                                class="{% if filter_by == 'favorites' %}active{% endif %} nav-item ml-1">
+                                                <a class="nav-link"
+                                                   href="{% url 'music:songs' 'favorites' %}">Favorites</a>
+                                            </li>
+
+                                        </ul>
+                                    </nav>
+
                                 </div>
+                            </div>
 
-                          {% if error_message %}
-                            <p><strong>{{ error_message }}</strong></p>
-                          {% endif %}
+                            {% if error_message %}
+                                <p><strong>{{ error_message }}</strong></p>
+                            {% endif %}
 
                             {% for song in song_list %}
-                            <div class="container col-12 px-0">
-                            <div class="row px-0 audioPlayer">
 
+                                <!-- ******* PLAYER FROM TEMPLATE******* -->
 
-                                <div class="my-0 py-0 col-12 col-md-9 col-lg-10 px-1 border-top">
-
-                                    <div class="container">
-                                         <div class="playerContainer">
-                                            <div class="info">
-                                                <div class="row justify-content-between text-{{ song.album.border_color }}">
-                                                    <div class="row col-9 mx-1">
-                                                        <a href="{% url 'music:detail' song.album.id %}" class="col-12 col-md-7 text-center text-md-left">{{ song.album }} </a>
-                                                        <span class="audioName col-12 col-md-5 text-center text-md-right">{{ song.song_title }}</span>
-                                                    </div>
-                                                    <div class="timing col-2">
-                                                        <span id="start-{{ song.id }}">0:00</span>
-                                                    </div>
-                                                </div>
-                                                <div class="seekBar">
-                                                    <span class="outer outer-{{ song.id }}">
-                                                        <span class="progress progress-{{ song.album.border_color }} inner" id="progress-{{ song.id }}"></span>
-                                                    </span>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                </div>
-                                <div class="my-0 py-0 border-top row justify-content-between col-12 col-md-3 col-lg-2 text-center px-0 mx-0">
-
-                                    <audio class="audio d-none" id="audio-{{ song.id }}">
-                                        <source src="{{ song.audio_file.url }}">
-                                    </audio>
-                                    <button
-                                       class="btn btn-outline-{{ song.album.border_color }} bo-plr col-4 my-0"
-                                       onclick="playSong('{{ song.id }}');"
-                                       id="pbtn-{{ song.id }}">
-                                            <div id="{{ song.id }}">
-                                                <div class="playbutton play">
-                                                    <i class="fas fa-play"></i>
-                                                    <i class="fas fa-pause"></i>
-                                                </div>
-                                            </div>
-                                    </button>
-                                    <a href="{% url 'music:favorite' song.id %}"
-                                       class="btn btn-outline-{{ song.album.border_color }} bo-plr col-4 my-0">
-                                        <span><i class="fab fa-gripfire {% if song.is_favorite %}active{% endif %}"></i></span>
-                                    </a>
-
-                                    <form    action="{% url 'music:delete_song' song.album.id song.id%}"
-                                             method="post" class="btn btn-outline-{{ song.album.border_color }} bo-plr col-4 my-0">
-                                         {% csrf_token %}
-                                         <input type="hidden" name="album_id" value="{{ song.album.id }}">
-                                             <button class="btn btn-link" type="submit">
-                                                     <span><i class="fas fa-trash-alt"></i></span>
-                                             </button>
-                                    </form>
-
-                                </div>
-                                </div>
-                                </div>
-
+                                {% include 'music/player_template.html' %}
 
                             {% endfor %}
-                      </div>
-                      </div>
-    {% else %}
-        <h1>No results for {{ q }}</h1>
-    {% endif %}
-    </div>
-    </div>
+
+
+                        </div>
+                    </div>
+
+                {% else %}
+                    <h1>No results for {{ q }}</h1>
+                {% endif %}
+
+            </div>
+        </div>
     </div>
 {% endblock %}

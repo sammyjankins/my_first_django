@@ -32,7 +32,7 @@ function playSong(song_id) {
         if (flag) {
             time_info.innerHTML = '0:00';
             $(skbrInner).css('width', '0%');
-            audio.currentTime = 0;
+            audio.currentTime = 1;
         } else {
             let seekBarPercentage = getPercentage(audio.currentTime.toFixed(2), audio.duration.toFixed(2));
             time_info.innerHTML = myTime(audio.duration - audio.currentTime);
@@ -79,13 +79,27 @@ function playSong(song_id) {
 
     }, 550);
 
-    skbrOuter.onclick = function(e){
-        if (!aud.ended && length!==undefined){
+    skbrOuter.onclick = function (e) {
+        if (!aud.ended && length !== undefined) {
             var seekPosition = e.pageX - $(skbrOuter).offset().left;
             if (
                 seekPosition >= 0 &&
                 seekPosition < $(skbrOuter).width()
-            ){
+            ) {
+                aud.currentTime = parseFloat((seekPosition * aud.duration) / $(skbrOuter).width());
+                updateTiming(song_id);
+            }
+        }
+    };
+
+    skbrOuter.ontouchstart = function (e) {
+        var xPos = e.originalEvent.touches[0].pageX;
+        if (!aud.ended && length !== undefined) {
+            var seekPosition = xPos - $(skbrOuter).offset().left;
+            if (
+                seekPosition >= 0 &&
+                seekPosition < $(skbrOuter).width()
+            ) {
                 aud.currentTime =
                     parseFloat((seekPosition * aud.duration) / $(skbrOuter).width());
                 updateTiming(song_id);
@@ -101,3 +115,4 @@ function toggleButtonClass(song_id) {
     btn.toggle('pause');
 
 }
+

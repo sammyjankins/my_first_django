@@ -8,27 +8,6 @@ def prod(iterable):
     return reduce(mul, iterable, 1)
 
 
-def rgb_to_hex(r, g, b):
-    return ''.join(['{:02X}'.format(x) for x in [max(0, min(y, 255)) for y in (r, g, b)]])
-
-
-def get_main_color(img_path):
-    image = Image.open(img_path)
-    colors = image.getcolors(prod(image.size))
-    max_occurence, most_present = 0, 0
-    try:
-        for c in colors:
-            hsl = rgb_to_hls(*c[1])
-            if c[0] > max_occurence and ((100 < hsl[1] < 200) and (-0.2 > hsl[2] > -1)):
-                (max_occurence, most_present) = c
-        if most_present == 0:
-            return 'white'
-        main_color = most_present
-    except TypeError:
-        return 'white'
-    return ['#' + rgb_to_hex(*main_color), rgb_to_hls(*main_color)[0]]
-
-
 COLORS = {
     'blue': (0.5862745098039216, 0.6333333333333333),  # 007bff
     'indigo': (0.6333333333333333, 0.7137254901960784),  # 6610f2
@@ -44,16 +23,29 @@ COLORS = {
 }
 
 
-def get_border_color(hue):
+def get_color(img_path):
+    image = Image.open(img_path)
+    colors = image.getcolors(prod(image.size))
+    max_occurence, most_present = 0, 0
+    try:
+        for c in colors:
+            hsl = rgb_to_hls(*c[1])
+            if c[0] > max_occurence and ((100 < hsl[1] < 200) and (-0.2 > hsl[2] > -1)):
+                (max_occurence, most_present) = c
+        if most_present == 0:
+            return '#ffffff'
+        main_color = most_present
+    except TypeError:
+        return 'white'
+    primary_color = rgb_to_hls(*main_color)[0]
     for key, value in COLORS.items():
-        if value[0] <= hue < value[1]:
+        if value[0] <= primary_color < value[1]:
             return key
 
 
 def rgb_to_hls(r, g, b):
     maxc = max(r, g, b)
     minc = min(r, g, b)
-    # XXX Can optimize (maxc+minc) and (maxc-minc)
     l = (minc + maxc) / 2.0
     if minc == maxc:
         return 0.0, l, 0.0

@@ -1,7 +1,7 @@
 @import url('https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css');
 
 html, body {
-    overflow: auto;
+    overflow: visible;
     min-height: 100%;
     margin: 0;
 }
@@ -15,6 +15,12 @@ body {
     justify-content: flex-start;
 }
 
+.popover{
+    padding: 10px 10px 0 10px;
+    min-width: 40%;
+    max-width: 80%;
+}
+
 .body-content {
     width: 100%;
     margin-bottom: 2rem;
@@ -24,8 +30,19 @@ body {
     min-height: calc(100vh - 335px);
 }
 
-.navbar .container-fluid .navbar-brand {
+.navbar .container-fluid .navbar-brand,
+.viberr{
     font-family: 'Pacifico', cursive;
+    text-shadow: 0 0 2px lightskyblue;
+}
+
+.viberr,
+.viberr:hover,
+.viberr:active,
+.viberr:focus
+{
+    text-decoration: none;
+    color: purple;
 }
 
 .navbar-toggler {
@@ -38,22 +55,11 @@ body {
 
 .navbar .container-fluid .navbar-brand:hover,
 .navbar .container-fluid .navbar-brand:focus {
-    color: #ffef96;
+    color: lightskyblue;
 }
 
 .navbaricon {
     color: white;
-}
-
-.fa-facebook,
-.fa-bandcamp,
-.fa-spotify,
-.fa-vk,
-.fa-soundcloud,
-.fa-link,
-.fa-itunes,
-.social_link{
-    color: #B0B0B0;
 }
 
 .social_link:hover,
@@ -305,6 +311,17 @@ body {
     font-weight: bold;
 }
 
+.fa-facebook,
+.fa-bandcamp,
+.fa-spotify,
+.fa-vk,
+.fa-soundcloud,
+.fa-link,
+.fa-itunes,
+.social_link,
+.descBtn{
+    color: #B0B0B0;
+}
 
 /* Button-outline icons */
 
@@ -504,10 +521,18 @@ section {
     color: #ffffff;
 }
 
+
 #footer ul.social li:hover a i {
-    font-size: 50px;
+    font-size: 40px;
     margin-top: -25px;
-    color: #ffef96;
+    color: lightskyblue;
+    text-shadow: 0 0 2px lightskyblue;
+}
+
+#footer ul.social li:hover a .bc_icon {
+    font-size: 40px;
+    margin-top: -25px;
+    color: darkcyan;
 }
 
 
@@ -534,8 +559,7 @@ section {
     transition: .5s all ease;
 }
 
-#myBtn:hover,
-#myBtn i:hover {
+#myBtn:hover {
     font-size: 45px;
     margin-bottom: 10px;
     color: #ffef96;
@@ -569,3 +593,17 @@ section {
     transition: 1s;
 }
 
+.dropleft .dropdown-toggle::before { content: none }
+
+.dropdown-menu {
+    background-color: #343a40;
+    min-width: 4rem;
+}
+
+.add-btn {
+    content: 'Add Album';
+}
+
+.update-btn{
+    content: 'Update';
+}

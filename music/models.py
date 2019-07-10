@@ -1,7 +1,6 @@
 # -*- coding: utf-8 -*-
 from __future__ import unicode_literals
 from django.db import models
-from django.urls import reverse
 from .process_color import *
 
 from django.contrib.auth.models import Permission, User
@@ -26,8 +25,8 @@ class Album(models.Model):
     website_3 = models.CharField(max_length=100, blank=True)
     website_4 = models.CharField(max_length=100, blank=True)
     website_5 = models.CharField(max_length=100, blank=True)
+    description = models.TextField(blank=True)
     color = models.CharField(max_length=10)
-    border_color = models.CharField(max_length=15)
     album_logo = models.FileField()
     is_favorite = models.BooleanField(default=False)
 
@@ -36,25 +35,15 @@ class Album(models.Model):
         self.webInstances = []
         self.webSites = set()
         if self.album_logo:
-            self.define_colors()
+            self.define_color()
         if len(self.webInstances) == 0:
             self.set_websites()
 
     def __str__(self):
         return '{} - {}'.format(self.artist, self.album_title)
 
-    def define_colors(self):
-        color_data = get_main_color(self.album_logo.path)
-        if color_data == 'white':
-            self.color = '#ffffff'
-            self.border_color = 'white'
-        else:
-            self.color = color_data[0]
-            self.border_color = get_border_color(color_data[1])
-        self.save()
-
-    def get_absolute_url(self):
-        return reverse('music:detail', kwargs={'pk': self.pk})
+    def define_color(self):
+        self.color = get_color(self.album_logo.path)
 
     def set_websites(self):
         inputs = [self.website_1, self.website_2, self.website_3, self.website_4, self.website_5]
@@ -73,7 +62,24 @@ class Album(models.Model):
                     if weblink.website not in self.webSites:
                         self.webInstances.append(weblink)
                         self.webSites.add(weblink.website)
-        self.save()
+
+
+def add_demo_albums(user):
+    prim_k = (107, 108, 109)
+    for pk in prim_k:
+        album_to_copy = Album.objects.get(pk=pk)
+        album_to_copy.pk = None
+        album_to_copy.save()
+        album_to_fill = Album.objects.last()
+        album_to_fill.user = user
+        album_to_fill.save()
+        songs_to_copy = Song.objects.filter(album=Album.objects.get(pk=pk))
+        for song in songs_to_copy:
+            song.pk = None
+            song.save()
+            s2 = Song.objects.last()
+            s2.album = album_to_fill
+            s2.save()
 
 
 class Song(models.Model):

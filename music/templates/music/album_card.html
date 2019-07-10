@@ -1,0 +1,67 @@
+<div class='card card-{{ album.color }} bg-dark text-white mw-20 mx-1'>
+    <a href="{% url 'music:detail' album.id %}">
+        <img src="{{ album.album_logo.url }}" alt="{{ album.album_logo.url }}"
+             class="card-img-top"
+             width="400">
+    </a>
+
+    <div class="card-body mx-1">
+
+        <!-- ******* INFO BEFORE DESCRIPTION ******* -->
+
+        <div class="row justify-content-between mx-0 px-0">
+            <h2 class="col-11 mx-0 px-0">{{ album.album_title }}</h2>
+            <a href="{% url 'music:album-update' album.id %}" class="col-1 mx-0 pt-2 px-0"><i
+                    class="fas fa-pen"
+                    onmouseover="this.style.color='{{ album.color }}'"
+                    onmouseout="this.style.color='#ffffff'"></i></a>
+        </div>
+
+        <div class="row justify-content-between mx-0 px-0 mt-1">
+            <h5 class="col-11 mx-0 px-0">{{ album.artist }}</h5>
+            <a href="{% url 'music:favorite_album' album.id %}"
+               data-toggle="tooltip" data-placement="top" title="Favorite"
+               class="col-1 mx-0 pb-2 px-0">
+                <i class="fab fa-gripfire fa-gripfire-x fa-2x {% if album.is_favorite %}active{% endif %}"></i>
+            </a>
+        </div>
+
+        <span>{{ album.genre }}</span>
+
+        <!-- ******* DESCRIPTION ******* -->
+
+        <div class="accordion border-top mt-3" id="accordionExample">
+            <div class="card-header" id="headingOne">
+                <h6 class="text-center mb-0 py-0">
+                    <button class="btn btn-link  descBtn" type="button" data-toggle="collapse"
+                            data-target="#collapseOne" aria-expanded="true"
+                            aria-controls="collapseOne">
+                        Description
+                    </button>
+                </h6>
+            </div>
+
+            <div id="collapseOne" class="collapse" aria-labelledby="headingOne"
+                 data-parent="#accordionExample">
+                <div class="card-body text-justify">
+                    {{ album.description }}
+                    <!--  This is the one of the three default albums on this demo website. Feel free to add albums from your own collection to test the functionality.   -->
+                </div>
+            </div>
+        </div>
+
+        <!-- BAND LINKS -->
+
+        <div class="border-top pt-3 mt-0">
+            {% for link in album.webInstances %}
+                <div class="mx-1">
+                    <a href="{{ link.url }}" class="social_link">
+                                            <span><i
+                                                    class="{% if link.website == 'link' %}fas{% else %}fab{% endif %} fa-{{ link.website }}"></i></span>
+                        &nbsp;{{ link.website }}
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
