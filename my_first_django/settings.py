@@ -26,7 +26,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = [
     'localhost',
-    '3eb50b5c.ngrok.io',
+    '9d1ee286.ngrok.io',
     'selfish-impala-81.localtunnel.me',
 ]
 

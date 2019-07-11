@@ -63,7 +63,7 @@
 
                                             </div>
 
-                                            <a href="{% url 'music:favorite_album' album.id %}"
+                                            <a href="{% url 'music:favorite_album' album.id 'index' %}"
                                                data-toggle="tooltip" data-placement="top" title="Favorite">
                                                 <i class="fab fa-gripfire fa-gripfire-x fa-2x {% if album.is_favorite %}active{% endif %}"></i>
                                             </a>

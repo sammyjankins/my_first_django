@@ -19,14 +19,14 @@
 
         <div class="row justify-content-between mx-0 px-0 mt-1">
             <h5 class="col-11 mx-0 px-0">{{ album.artist }}</h5>
-            <a href="{% url 'music:favorite_album' album.id %}"
+            <a href="{% url 'music:favorite_album' album.id 'detail' %}"
                data-toggle="tooltip" data-placement="top" title="Favorite"
                class="col-1 mx-0 pb-2 px-0">
                 <i class="fab fa-gripfire fa-gripfire-x fa-2x {% if album.is_favorite %}active{% endif %}"></i>
             </a>
         </div>
 
-        <span>{{ album.genre }}</span>
+        <div>{{ album.genre }}</div>
 
         <!-- ******* DESCRIPTION ******* -->
 
@@ -55,7 +55,7 @@
         <div class="border-top pt-3 mt-0">
             {% for link in album.webInstances %}
                 <div class="mx-1">
-                    <a href="{{ link.url }}" class="social_link">
+                    <a href="{{ link.url }}" class="social_link" target="_blank">
                                             <span><i
                                                     class="{% if link.website == 'link' %}fas{% else %}fab{% endif %} fa-{{ link.website }}"></i></span>
                         &nbsp;{{ link.website }}

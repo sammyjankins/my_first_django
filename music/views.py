@@ -6,6 +6,7 @@ from .forms import AlbumForm, SongForm, UserRegForm
 from django.contrib import messages
 from django.db.models import Q
 from django.http import JsonResponse
+from os import remove
 import eyed3
 
 AUDIO_FILE_TYPES = ['wav', 'mp3', 'ogg']
@@ -72,40 +73,44 @@ def create_album(request):
 
 
 def create_song(request, album_id):
-    form = SongForm(request.POST or None, request.FILES or None)
-    album = get_object_or_404(Album, pk=album_id)
-    if form.is_valid():
-        for obj in request.FILES.getlist('audio_files'):
-            albums_songs = album.song_set.all()
-            song = Song()
-            song.album = album
-            song.audio_file = obj
-            song.song_title = eyed3.load(obj.temporary_file_path()).tag.title
-            for s in albums_songs:
-                if s.song_title == song.song_title:
+    if not request.user.is_authenticated:
+        return redirect('music:register')
+    else:
+        form = SongForm(request.POST or None, request.FILES or None)
+        album = get_object_or_404(Album, pk=album_id)
+        if form.is_valid():
+            for obj in request.FILES.getlist('audio_files'):
+                albums_songs = album.song_set.all()
+                song = Song()
+                song.album = album
+                song.audio_file = obj
+                # grabbing song title from ID3 tags
+                song.song_title = eyed3.load(obj.temporary_file_path()).tag.title
+                for s in albums_songs:
+                    if s.song_title == song.song_title:
+                        context = {
+                            'album': album,
+                            'form': form,
+                            'error_message': 'You already added that song - {}'.format(song.song_title),
+                        }
+                        return render(request, 'music/create_song.html', context)
+                file_type = song.audio_file.url.split('.')[-1]
+                file_type = file_type.lower()
+                if file_type not in AUDIO_FILE_TYPES:
                     context = {
                         'album': album,
                         'form': form,
-                        'error_message': 'You already added that song',
+                        'error_message': 'Audio file must be WAV, MP3, or OGG',
                     }
                     return render(request, 'music/create_song.html', context)
-            file_type = song.audio_file.url.split('.')[-1]
-            file_type = file_type.lower()
-            if file_type not in AUDIO_FILE_TYPES:
-                context = {
-                    'album': album,
-                    'form': form,
-                    'error_message': 'Audio file must be WAV, MP3, or OGG',
-                }
-                return render(request, 'music/create_song.html', context)
 
-            song.save()
-        return render(request, 'music/detail.html', {'album': album})
-    context = {
-        'album': album,
-        'form': form,
-    }
-    return render(request, 'music/create_song.html', context)
+                song.save()
+            return render(request, 'music/detail.html', {'album': album})
+        context = {
+            'album': album,
+            'form': form,
+        }
+        return render(request, 'music/create_song.html', context)
 
 
 def detail(request, album_id):
@@ -118,47 +123,66 @@ def detail(request, album_id):
 
 
 def delete_album(request, album_id):
-    album = Album.objects.get(pk=album_id)
-    album.delete()
-    return redirect('../../')
+    if not request.user.is_authenticated:
+        return redirect('music:index')
+    else:
+        album = Album.objects.get(pk=album_id)
+        albums_songs = album.song_set.all()
+        for song in albums_songs:
+            remove(song.audio_file.path)
+        remove(album.album_logo.path)
+        album.delete()
+        return redirect('../../')
 
 
 def delete_song(request, album_id, song_id):
-    album = get_object_or_404(Album, pk=album_id)
-    song = Song.objects.get(pk=song_id)
-    song.delete()
-    return render(request, 'music/detail.html', {'album': album})
-
-
-def favorite(request, song_id):
-    song = get_object_or_404(Song, pk=song_id)
-    album = song.album
-    try:
-        if song.is_favorite:
-            song.is_favorite = False
-        else:
-            song.is_favorite = True
-        song.save()
-    except (KeyError, Song.DoesNotExist):
-        return JsonResponse({'success': False})
+    if not request.user.is_authenticated:
+        return redirect('music:register')
     else:
+        album = get_object_or_404(Album, pk=album_id)
+        song = Song.objects.get(pk=song_id)
+        remove(song.audio_file.path)
+        song.delete()
         return render(request, 'music/detail.html', {'album': album})
 
 
-def favorite_album(request, album_id):
-    album = get_object_or_404(Album, pk=album_id)
-    try:
-        if album.is_favorite:
-            album.is_favorite = False
-        else:
-            album.is_favorite = True
-        album.save()
-    except (KeyError, Album.DoesNotExist):
-        return JsonResponse({'success': False})
+def favorite(request, song_id):
+    if not request.user.is_authenticated:
+        return redirect('music:register')
     else:
-        albums = Album.objects.filter(user=request.user)
-        return render(request, 'music/index.html', {'albums': albums})
-        # return JsonResponse({'success': True})
+        song = get_object_or_404(Song, pk=song_id)
+        album = song.album
+        try:
+            if song.is_favorite:
+                song.is_favorite = False
+            else:
+                song.is_favorite = True
+            song.save()
+        except (KeyError, Song.DoesNotExist):
+            return JsonResponse({'success': False})
+        else:
+            return render(request, 'music/detail.html', {'album': album})
+
+
+def favorite_album(request, album_id, current_template):
+    if not request.user.is_authenticated:
+        return redirect('music:register')
+    else:
+        album = get_object_or_404(Album, pk=album_id)
+        try:
+            if album.is_favorite:
+                album.is_favorite = False
+            else:
+                album.is_favorite = True
+            album.save()
+        except (KeyError, Album.DoesNotExist):
+            return JsonResponse({'success': False})
+        else:
+            if current_template == 'index':
+                albums = Album.objects.filter(user=request.user)
+                return render(request, 'music/index.html', {'albums': albums})
+            else:
+                return render(request, 'music/detail.html', {'album': album})
 
 
 def register(request):
@@ -177,7 +201,7 @@ def register(request):
 
 def songs(request, filter_by):
     if not request.user.is_authenticated:
-        return render(request, 'music/login.html')
+        return redirect('music:register')
     else:
         try:
             song_ids = []
