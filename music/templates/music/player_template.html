@@ -3,16 +3,16 @@
 
         <!-- ******* INFO (title, progress bar and timing) ******* -->
 
-        <div class="my-0 py-0 col-10 px-1 border-top">
+        <div class="my-0 py-0 col-10 px-1 border-top px-auto">
 
-            <div class="container">
+            <div class="container mx-auto">
                 <div class="playerContainer">
                     <div class="info">
                         <div class="row justify-content-between text-{{ song.album.color }}">
                             <div class="row col-8 mx-1">
                                 <a href="{% url 'music:detail' song.album.id %}"
-                                   class="col-12 col-md-7 text-center text-md-left">{{ song.album }} </a>
-                                <span class="audioName col-12 col-md-5 text-center text-md-right">{{ song.song_title }}</span>
+                                   class="col-12 col-md-7 text-center text-md-left px-0">{{ song.album }} </a>
+                                <span class="audioName col-12 col-md-5 text-center text-md-right px-0">{{ song.song_title }}</span>
                             </div>
                             <div class="timing col-3">
                                 <span id="start-{{ song.id }}">0:00</span>
@@ -31,9 +31,10 @@
         </div>
 
 
-        <div class="my-0 py-0 border-top row justify-content-between col-2 text-center px-0 mx-0 dropleft">
+        <div class="my-0 py-0 border-top row justify-content-between
+                    col-2 text-center px-0 mx-0">
 
-            <!-- ******* PLAY-PAUSE BUTTON ******* -->
+            <!-- ******* AUDIO FILE ******* -->
 
             <audio class="audio d-none" id="audio-{{ song.id }}">
                 <source src="{{ song.audio_file.url }}">
@@ -42,7 +43,7 @@
             <!-- ******* PLAY-PAUSE BUTTON ******* -->
 
             <button
-                    class="btn btn-outline-{{ song.album.color }} bo-plr col-6 my-0"
+                    class="btn btn-outline-{{ song.album.color }} bo-plr col-6 col-md-4 my-0"
                     onclick="playSong('{{ song.id }}');"
                     id="pbtn-{{ song.id }}">
                 <div id="{{ song.id }}">
@@ -53,38 +54,69 @@
                 </div>
             </button>
 
-            <!-- ******* DROPDOWN TOGGLE ******* -->
+            <!-- ******* FOR BIG SCREENS ******* -->
 
-
-            <a href="#"
-               class="btn btn-lg btn-outline-{{ song.album.color }} bo-plr col-6 my-0 px-0 dropdown-toggle"
-               role="button" id="dropdownMenuLink" data-toggle="dropdown"
-               aria-haspopup="true" aria-expanded="false">
-                <i class="fas fa-ellipsis-h"></i>
-            </a>
-
-            <div class="dropdown-menu py-0" aria-labelledby="dropdownMenuLink">
-
+            <div class="d-none d-md-flex m-0 p-0 col-8">
                 <!-- ******* FAV BUTTON ******* -->
 
                 <a href="{% url 'music:favorite' song.id 'songs' %}"
-                   class="btn btn-outline-{{ song.album.color }} py-2">
+                   class="btn btn-outline-{{ song.album.color }} col-6 my-0">
                     <i class="fab fa-gripfire {% if song.is_favorite %}active{% endif %}"></i>
                 </a>
 
                 <!-- ******* DELETE BUTTON ******* -->
 
                 <form action="{% url 'music:delete_song' song.album.id 'songs' song.id %}"
-                      method="post" class="btn btn-outline-{{ song.album.color }} my-0">
+                      method="post" class="btn btn-outline-{{ song.album.color }} col-6 my-0">
                     {% csrf_token %}
                     <input type="hidden" name="album_id" value="{{ song.album.id }}">
                     <button class="btn btn-link" type="submit">
                         <i class="fas fa-trash-alt"></i>
                     </button>
                 </form>
+            </div>
+
+            <!-- ******* FOR SMALL SCREENS ******* -->
+
+            <div class="d-flex d-md-none m-0 p-0 col-6 dropleft">
+
+                <!-- ******* DROPDOWN TOGGLE ******* -->
+
+
+                <a href="#"
+                   class="btn btn-lg btn-outline-{{ song.album.color }} bo-plr my-0 col-12 px-0 dropdown-toggle"
+                   role="button" id="dropdownMenuLink" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">
+                    <i class="fas fa-ellipsis-h"></i>
+                </a>
+
+
+                <div class="dropdown-menu py-0" aria-labelledby="dropdownMenuLink">
+
+                    <!-- ******* FAV BUTTON ******* -->
+
+                    <a href="{% url 'music:favorite' song.id 'songs' %}"
+                       class="btn btn-outline-{{ song.album.color }} py-2">
+                        <i class="fab fa-gripfire {% if song.is_favorite %}active{% endif %}"></i>
+                    </a>
+
+                    <!-- ******* DELETE BUTTON ******* -->
+
+                    <form action="{% url 'music:delete_song' song.album.id 'songs' song.id %}"
+                          method="post" class="btn btn-outline-{{ song.album.color }} my-0">
+                        {% csrf_token %}
+                        <input type="hidden" name="album_id" value="{{ song.album.id }}">
+                        <button class="btn btn-link" type="submit">
+                            <i class="fas fa-trash-alt"></i>
+                        </button>
+                    </form>
+
+                </div>
 
             </div>
 
         </div>
+
     </div>
+
 </div>
