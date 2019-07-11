@@ -132,10 +132,10 @@ def delete_album(request, album_id):
             remove(song.audio_file.path)
         remove(album.album_logo.path)
         album.delete()
-        return redirect('../../')
+        return redirect('music:index')
 
 
-def delete_song(request, album_id, song_id):
+def delete_song(request, album_id, song_id, current_template):
     if not request.user.is_authenticated:
         return redirect('music:register')
     else:
@@ -143,10 +143,18 @@ def delete_song(request, album_id, song_id):
         song = Song.objects.get(pk=song_id)
         remove(song.audio_file.path)
         song.delete()
-        return render(request, 'music/detail.html', {'album': album})
+        if current_template == 'songs':
+            song_ids = []
+            for album in Album.objects.filter(user=request.user):
+                for song in album.song_set.all():
+                    song_ids.append(song.pk)
+            users_songs = Song.objects.filter(pk__in=song_ids)
+            return render(request, 'music/songs.html', {'song_list': users_songs})
+        else:
+            return render(request, 'music/detail.html', {'album': album})
 
 
-def favorite(request, song_id):
+def favorite(request, song_id, current_template):
     if not request.user.is_authenticated:
         return redirect('music:register')
     else:
@@ -161,7 +169,15 @@ def favorite(request, song_id):
         except (KeyError, Song.DoesNotExist):
             return JsonResponse({'success': False})
         else:
-            return render(request, 'music/detail.html', {'album': album})
+            if current_template == 'songs':
+                song_ids = []
+                for album in Album.objects.filter(user=request.user):
+                    for song in album.song_set.all():
+                        song_ids.append(song.pk)
+                users_songs = Song.objects.filter(pk__in=song_ids)
+                return render(request, 'music/songs.html', {'song_list': users_songs})
+            else:
+                return render(request, 'music/detail.html', {'album': album})
 
 
 def favorite_album(request, album_id, current_template):

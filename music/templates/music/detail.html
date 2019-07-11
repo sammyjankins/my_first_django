@@ -107,14 +107,14 @@
 
                                             <!-- ******* FAV BUTTON ******* -->
 
-                                            <a href="{% url 'music:favorite' song.id %}"
+                                            <a href="{% url 'music:favorite' song.id 'detail' %}"
                                                class="btn btn-outline-{{ album.color }} py-2">
                                                 <i class="fab fa-gripfire {% if song.is_favorite %}active{% endif %}"></i>
                                             </a>
 
                                             <!-- ******* DELETE BUTTON ******* -->
 
-                                            <form action="{% url 'music:delete_song' song.album.id song.id %}"
+                                            <form action="{% url 'music:delete_song' song.album.id 'detail' song.id %}"
                                                   method="post" class="btn btn-outline-{{ album.color }} my-0">
                                                 {% csrf_token %}
                                                 <input type="hidden" name="album_id" value="{{ album.id }}">
